@@ -137,7 +137,7 @@ class Menubar: ObservableObject {
         if percent <= 0 {
             statusItem.button?.title = "💰 暂未开工"
         } else if percent >= 1 {
-            statusItem.button?.title = "💰 下班啦"
+            statusItem.button?.title = String(format: "💰 下班啦，今日 %.0f 到手", money)
         } else {
             statusItem.button?.title = String(format: "💰 您今日已挣 %.4f 元", money)
         }
