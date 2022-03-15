@@ -20,7 +20,7 @@ struct ContentView: View {
 
     @AppStorage("wiki.qaq.monthPaid")
     var __monthPaid: Int = 20000
-    
+
     @AppStorage("wiki.qaq.dayWorkOfMonth")
     var __dayWorkOfMonth: Int = 20
 
@@ -208,12 +208,16 @@ struct ContentView: View {
             GeometryReader { r in
                 Rectangle()
                     .foregroundColor(.white)
+                    .opacity(0.9)
                     .cornerRadius(6)
                     .overlay(
                         HStack {
                             Spacer()
                             ForEach(1 ..< 24, id: \.self) { _ in
-                                Divider()
+                                Rectangle()
+                                    .frame(width: 0.5)
+                                    .foregroundColor(.black)
+                                    .opacity(0.1)
                                 Spacer()
                             }
                         }

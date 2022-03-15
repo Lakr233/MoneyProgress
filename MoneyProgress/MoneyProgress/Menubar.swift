@@ -19,10 +19,10 @@ class Menubar: ObservableObject {
 
     @AppStorage("wiki.qaq.monthPaid")
     var monthPaid: Int = 20000
-    
+
     @AppStorage("wiki.qaq.dayWorkOfMonth")
     var dayWorkOfMonth: Int = 20
-    
+
     @Published var menubarRunning = false
     @Published var todayPercent: Double = 0
     @Published var todayEarn: Int = 0
@@ -88,7 +88,7 @@ class Menubar: ObservableObject {
             statusItem.button?.title = "💰 您一个月到底工作几天？"
             return
         }
-        
+
         let sd = Date(timeIntervalSince1970: workStart)
         let ed = Date(timeIntervalSince1970: workEnd)
         let totalSec: Double = ed.timeIntervalSince(sd)
