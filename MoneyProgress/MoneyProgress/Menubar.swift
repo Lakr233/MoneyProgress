@@ -83,12 +83,7 @@ class Menubar: ObservableObject {
         guard let statusItem = statusItem else {
             return
         }
-
-        if dayWorkOfMonth <= 0 || dayWorkOfMonth >= 32 {
-            statusItem.button?.title = "💰 您一个月到底工作几天？"
-            return
-        }
-
+        
         let sd = Date(timeIntervalSince1970: workStart)
         let ed = Date(timeIntervalSince1970: workEnd)
         let totalSec: Double = ed.timeIntervalSince(sd)
