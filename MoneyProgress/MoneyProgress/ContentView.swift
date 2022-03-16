@@ -152,9 +152,9 @@ struct ContentView: View {
     }
     
     var rmbPerSecond: Double {
-        // interval = (workEndDate - noonBreakEndDate) + (noonBreakStartDate - workStartDate)
-        var timeInterval: TimeInterval = 0
+        var timeInterval: TimeInterval = 1
         if isHaveNoonBreak {
+            // interval = (workEndDate - noonBreakEndDate) + (noonBreakStartDate - workStartDate)
             timeInterval = workEndDate.timeIntervalSince(noonBreakEndDate) + noonBreakStartDate.timeIntervalSince(workStartDate)
         } else {
             // interval = workEndDate - workStartDate

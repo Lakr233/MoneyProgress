@@ -22,6 +22,14 @@ class Menubar: ObservableObject {
 
     @AppStorage("wiki.qaq.dayWorkOfMonth")
     var dayWorkOfMonth: Int = 20
+    
+    @AppStorage("wiki.qaq.isHaveNoonBreak")
+    var isHaveNoonBreak: Bool = false
+    
+    @AppStorage("wiki.qaq.noonBreakStartTimeStamp")
+    var noonBreakStartTimeStamp: Double = 0
+    @AppStorage("wiki.qaq.noonBreakEndTimeStamp")
+    var noonBreakEndTimeStamp: Double = 0
 
     @Published var menubarRunning = false
     @Published var todayPercent: Double = 0
@@ -84,10 +92,21 @@ class Menubar: ObservableObject {
             return
         }
         
-        let sd = Date(timeIntervalSince1970: workStart)
-        let ed = Date(timeIntervalSince1970: workEnd)
-        let totalSec: Double = ed.timeIntervalSince(sd)
-        if totalSec <= 0 {
+        let workStartDate = Date(timeIntervalSince1970: workStart)
+        let workEndDate = Date(timeIntervalSince1970: workEnd)
+        let noonBreakStartDate = Date(timeIntervalSince1970: noonBreakStartTimeStamp)
+        let noonBreakEndDate = Date(timeIntervalSince1970: noonBreakEndTimeStamp)
+        
+        var totalWorkTimeInterval: TimeInterval = 1
+        if isHaveNoonBreak {
+            // interval = (workEndDate - noonBreakEndDate) + (noonBreakStartDate - workStartDate)
+            totalWorkTimeInterval = workEndDate.timeIntervalSince(noonBreakEndDate) + noonBreakStartDate.timeIntervalSince(workStartDate)
+        } else {
+            // interval = workEndDate - workStartDate
+            totalWorkTimeInterval = workEndDate.timeIntervalSince(workStartDate)
+        }
+        
+        if totalWorkTimeInterval <= 0 {
             statusItem.button?.title = "💰 数据错误"
             return
         }
@@ -99,8 +118,8 @@ class Menubar: ObservableObject {
             year: calendar.component(.year, from: now),
             month: calendar.component(.month, from: now),
             day: calendar.component(.day, from: now),
-            hour: calendar.component(.hour, from: sd),
-            minute: calendar.component(.minute, from: sd),
+            hour: calendar.component(.hour, from: workStartDate),
+            minute: calendar.component(.minute, from: workStartDate),
             second: 0
         ).date
 
@@ -109,8 +128,15 @@ class Menubar: ObservableObject {
             return
         }
 
-        let passed = now.timeIntervalSince(todayStart)
-        var percent = passed / totalSec
+        var passed = 1.0
+        if isHaveNoonBreak {
+            // interval = (now - noonBreakEndDate) + (noonBreakStartDate - workStartDate)
+            passed = now.timeIntervalSince(noonBreakEndDate) + noonBreakStartDate.timeIntervalSince(workStartDate)
+        } else {
+            // interval = workEndDate - workStartDate
+            passed = now.timeIntervalSince(workStartDate)
+        }
+        var percent = passed / totalWorkTimeInterval
         if percent < 0 { percent = 0 }
         if percent > 1 { percent = 1 }
         let todayMake = Double(monthPaid / dayWorkOfMonth)
