@@ -30,6 +30,9 @@ struct ContentView: View {
     
     @AppStorage("wiki.qaq.isHaveNoonBreak")
     var __isHaveNoonBreak: Bool = false
+
+    @AppStorage("wiki.qaq.compactMode")
+    var compactMode: Bool = false
     
     @State var workStartTimeStamp: Double = 0
     @State var workEndTimeStamp: Double = 0
@@ -268,6 +271,10 @@ struct ContentView: View {
                         message: Text("💰 您一个月到底工作几天？请检查自己的工作天数是否合理。")
                     )
                 }
+            }
+
+            Toggle(isOn: $compactMode) {
+              Text("紧凑模式")
             }
             
             Spacer()
