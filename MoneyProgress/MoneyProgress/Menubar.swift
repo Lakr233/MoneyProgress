@@ -167,7 +167,7 @@ class Menubar: ObservableObject {
         } else if percent >= 1 {
             title = String(format: compactMode ? "💰 %.0f 到手" : "💰 下班啦，今日 %.0f 到手", money)
         } else {
-            title = String(format: compactMode ? "💰 %.4f 元" : "💰 您今日已挣 %.4f %@", money, currencyUnit)
+            title = String(format: compactMode ? "💰 %.4f %@" : "💰 您今日已挣 %.4f %@", money, currencyUnit)
         }
         statusItem.button?.title = title
     }
