@@ -30,7 +30,7 @@ class Menubar: ObservableObject {
     var noonBreakStartTimeStamp: Double = 0
     @AppStorage("wiki.qaq.noonBreakEndTimeStamp")
     var noonBreakEndTimeStamp: Double = 0
-    
+
     @AppStorage("wiki.qaq.currencyUnit")
     var currencyUnit: String = "RMB"
 

@@ -33,10 +33,10 @@ struct ContentView: View {
 
     @AppStorage("wiki.qaq.compactMode")
     var compactMode: Bool = false
-    
+
     @AppStorage("wiki.qaq.currencyUnit")
     var __currencyUnit: String = "RMB"
-    
+
     @State var workStartTimeStamp: Double = 0
     @State var workEndTimeStamp: Double = 0
 
@@ -56,9 +56,9 @@ struct ContentView: View {
     @State private var isShowAlert = false
     @State private var isMoneyInvalid = false
     @State private var isWorkDayInvalid = false
-    
+
     @State private var currencyUnit = "RMB"
-    
+
     var body: some View {
         ZStack {
             ColorfulView(
@@ -144,7 +144,7 @@ struct ContentView: View {
         isHaveNoonBreak = false
 
         dayWorkOfMonth = 20
-        
+
         currencyUnit = "RMB"
     }
 
@@ -201,7 +201,7 @@ struct ContentView: View {
     var formattedRMBPerDay: String {
         String(format: "%.2f", rmbPerDay)
     }
-        
+
     var appIntro: some View {
         VStack(alignment: .center, spacing: 15) {
             Image("avatar")
@@ -287,7 +287,7 @@ struct ContentView: View {
                 Button {
                     fillInitialData()
                 } label: {
-                    Label("恢复默认（朝九晚六）", systemImage: "arrow.counterclockwise")
+                    Label("恢复默认（朝九晚六 RMB）", systemImage: "arrow.counterclockwise")
                 }
             }
 
@@ -296,9 +296,9 @@ struct ContentView: View {
             HStack {
                 VStack(alignment: .leading, spacing: 5) {
                     Text("这么看来，假设一个月工作 \(dayWorkOfMonth) 天：")
-                    Text("您一天能挣 \(formattedRMBPerDay) 元！")
+                    Text("您一天能挣 \(formattedRMBPerDay) \(currencyUnit)！")
                     Text("您一天有效工时 \(workHours) 小时！")
-                    Text("您一秒钟能挣 \(formattedRMBPerSecond) 元")
+                    Text("您一秒钟能挣 \(formattedRMBPerSecond) \(currencyUnit)")
                 }
                 .font(.system(.caption, design: .rounded))
                 .lineLimit(1)
@@ -371,7 +371,7 @@ struct ContentView: View {
                                         let mins = Double(shift * minPerPixel)
                                         let newStamp = updateDate(minsFromMidnight: mins)
                                         workStartTimeStamp = newStamp
-                                        workStartDate = Date.init(timeIntervalSince1970: newStamp)
+                                        workStartDate = Date(timeIntervalSince1970: newStamp)
                                     }
                             )
                     )
@@ -389,7 +389,7 @@ struct ContentView: View {
                                         let mins = Double(shift * minPerPixel)
                                         let newStamp = updateDate(minsFromMidnight: mins)
                                         workEndTimeStamp = newStamp
-                                        workEndDate = Date.init(timeIntervalSince1970: newStamp)
+                                        workEndDate = Date(timeIntervalSince1970: newStamp)
                                     }
                             )
                     )

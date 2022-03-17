@@ -9,7 +9,7 @@ import Foundation
 
 var currencyModels: [CurrencyModel] = load("ISO_4217_Currency _Codes.json")
 var validCurrencyModels = currencyModels.filter { currencyModel in
-    if (currencyModel.AlphabeticCode != nil) {
+    if currencyModel.AlphabeticCode != nil {
         return true
     } else {
         return false
@@ -20,8 +20,8 @@ func load<T: Decodable>(_ filename: String) -> T {
     let data: Data
 
     guard let file = Bundle.main.url(forResource: filename, withExtension: nil)
-        else {
-            fatalError("Couldn't find \(filename) in main bundle.")
+    else {
+        fatalError("Couldn't find \(filename) in main bundle.")
     }
 
     do {
