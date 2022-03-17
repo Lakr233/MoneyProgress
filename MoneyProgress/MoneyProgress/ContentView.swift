@@ -36,7 +36,7 @@ struct ContentView: View {
     var compactMode: Bool = false
 
     @AppStorage("wiki.qaq.currencyUnit")
-    var __currencyUnit: String = "RMB"
+    var __currencyUnit: String = "CNY"
 
     @State var workStartTimeStamp: Double = 0
     @State var workEndTimeStamp: Double = 0
@@ -58,7 +58,7 @@ struct ContentView: View {
     @State private var isMoneyInvalid = false
     @State private var isWorkDayInvalid = false
 
-    @State private var currencyUnit = "RMB"
+    @State private var currencyUnit = "CNY"
 
     @State private var openCoinTypePicker = false
 
@@ -78,9 +78,9 @@ struct ContentView: View {
                 VStack(alignment: .leading, spacing: 5) {
                     Spacer()
                     Text("这么看来，假设一个月工作 \(dayWorkOfMonth) 天：")
-                    Text("您一天能挣 \(formattedRMBPerDay) \(currencyUnit)！")
+                    Text("您一天能挣 \(formattedCoinPerDay) \(currencyUnit)！")
                     Text("您一天有效工时 \(workHours) 小时！")
-                    Text("您一秒钟能挣 \(formattedRMBPerSecond) \(currencyUnit)")
+                    Text("您一秒钟能挣 \(formattedCoinPerSecond) \(currencyUnit)")
                 }
                 .font(.system(.caption, design: .rounded))
                 .lineLimit(1)
@@ -94,7 +94,7 @@ struct ContentView: View {
                         Button {
                             fillInitialData()
                         } label: {
-                            Label("恢复默认（朝九晚六 RMB）", systemImage: "arrow.counterclockwise")
+                            Label("恢复默认（朝九晚六 CNY）", systemImage: "arrow.counterclockwise")
                         }
                     }
                 }
@@ -177,7 +177,7 @@ struct ContentView: View {
         workEndDate = getTodayDate(hour: 18) ?? date
         isHaveNoonBreak = false
         dayWorkOfMonth = 20
-        currencyUnit = "RMB"
+        currencyUnit = "CNY"
     }
 
     func getTodayDate(hour: Int, minute: Int = 0, second: Int = 0) -> Date? {
@@ -222,7 +222,7 @@ struct ContentView: View {
         return String(format: "%.1f", hours)
     }
 
-    var formattedRMBPerSecond: String {
+    var formattedCoinPerSecond: String {
         String(format: "%.4f", rmbPerSecond)
     }
 
@@ -230,7 +230,7 @@ struct ContentView: View {
         Double(monthPaid) / Double(dayWorkOfMonth)
     }
 
-    var formattedRMBPerDay: String {
+    var formattedCoinPerDay: String {
         String(format: "%.2f", rmbPerDay)
     }
 
