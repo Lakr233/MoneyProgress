@@ -10,6 +10,7 @@ import SwiftUI
 @main
 struct MoneyProgressApp: App {
     init() {
+        _ = currencyModels
         let timer = Timer(timeInterval: 1, repeats: true) { _ in
             checkWindow()
         }
