@@ -22,10 +22,10 @@ class Menubar: ObservableObject {
 
     @AppStorage("wiki.qaq.dayWorkOfMonth")
     var dayWorkOfMonth: Int = 20
-    
+
     @AppStorage("wiki.qaq.isHaveNoonBreak")
     var isHaveNoonBreak: Bool = false
-    
+
     @AppStorage("wiki.qaq.noonBreakStartTimeStamp")
     var noonBreakStartTimeStamp: Double = 0
     @AppStorage("wiki.qaq.noonBreakEndTimeStamp")
@@ -94,12 +94,12 @@ class Menubar: ObservableObject {
         guard let statusItem = statusItem else {
             return
         }
-        
+
         let workStartDate = Date(timeIntervalSince1970: workStart)
         let workEndDate = Date(timeIntervalSince1970: workEnd)
         let noonBreakStartDate = Date(timeIntervalSince1970: noonBreakStartTimeStamp)
         let noonBreakEndDate = Date(timeIntervalSince1970: noonBreakEndTimeStamp)
-        
+
         var totalWorkTimeInterval: TimeInterval = 1
         if isHaveNoonBreak {
             // interval = (workEndDate - noonBreakEndDate) + (noonBreakStartDate - workStartDate)
@@ -108,7 +108,7 @@ class Menubar: ObservableObject {
             // interval = workEndDate - workStartDate
             totalWorkTimeInterval = workEndDate.timeIntervalSince(workStartDate)
         }
-        
+
         if totalWorkTimeInterval <= 0 {
             statusItem.button?.title = "💰 数据错误"
             return
