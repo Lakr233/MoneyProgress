@@ -354,6 +354,7 @@ struct ContentView: View {
                                         let mins = Double(shift * minPerPixel)
                                         let newStamp = updateDate(minsFromMidnight: mins)
                                         workStartTimeStamp = newStamp
+                                        workStartDate = Date.init(timeIntervalSince1970: newStamp)
                                     }
                             )
                     )
@@ -371,6 +372,7 @@ struct ContentView: View {
                                         let mins = Double(shift * minPerPixel)
                                         let newStamp = updateDate(minsFromMidnight: mins)
                                         workEndTimeStamp = newStamp
+                                        workEndDate = Date.init(timeIntervalSince1970: newStamp)
                                     }
                             )
                     )
