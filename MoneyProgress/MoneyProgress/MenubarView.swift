@@ -17,6 +17,9 @@ struct MenubarView: View {
     ]
 
     let currentTitle: String
+    
+    @AppStorage("wiki.qaq.currencyUnit")
+    var currencyUnit: String = "RMB"
 
     init() {
         currentTitle = myTitle.randomElement()!
@@ -71,7 +74,7 @@ struct MenubarView: View {
             .frame(height: 15)
 
             HStack {
-                Text("预计今日一共挣钱 \(menubar.todayEarn) 元")
+                Text("预计今日一共挣钱 \(menubar.todayEarn) \(currencyUnit)")
                 Spacer()
             }
             .font(.system(.caption, design: .monospaced))

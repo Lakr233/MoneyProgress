@@ -31,6 +31,9 @@ struct ContentView: View {
     @AppStorage("wiki.qaq.isHaveNoonBreak")
     var __isHaveNoonBreak: Bool = false
     
+    @AppStorage("wiki.qaq.currencyUnit")
+    var __currencyUnit: String = "RMB"
+    
     @State var workStartTimeStamp: Double = 0
     @State var workEndTimeStamp: Double = 0
     
@@ -50,6 +53,8 @@ struct ContentView: View {
     @State private var isShowAlert = false
     @State private var isMoneyInvalid = false
     @State private var isWorkDayInvalid = false
+    
+    @State private var currencyUnit = "RMB"
     
     var body: some View {
         
@@ -75,6 +80,7 @@ struct ContentView: View {
                 noonBreakEndDate = Date.init(timeIntervalSince1970: __noonBreakEndTimeStamp)
                 monthPaid = __monthPaid
                 isHaveNoonBreak = __isHaveNoonBreak
+                currencyUnit = __currencyUnit
             }
         }
         .onChange(of: workStartDate) { newValue in
@@ -115,6 +121,10 @@ struct ContentView: View {
             __isHaveNoonBreak = newValue
             Menubar.shared.reload()
         }
+        .onChange(of: currencyUnit) { newValue in
+            __currencyUnit = newValue
+            Menubar.shared.reload()
+        }
     }
     
     func fillInitialData() {
@@ -133,6 +143,8 @@ struct ContentView: View {
         isHaveNoonBreak = false
         
         dayWorkOfMonth = 20
+        
+        currencyUnit = "RMB"
     }
     
     func getTodayDate(hour: Int, minute: Int = 0, second: Int = 0) -> Date? {
@@ -188,7 +200,7 @@ struct ContentView: View {
     var formattedRMBPerDay: String {
         return String.init(format: "%.2f", self.rmbPerDay)
     }
-    
+        
     var appIntro: some View {
         VStack(alignment: .center, spacing: 15) {
             Image("avatar")
@@ -212,25 +224,34 @@ struct ContentView: View {
                 }, set: { str in
                     monthPaid = Int(str) ?? 0
                 }))
-                .frame(width: 100)
-                Text("RMB")
-                Spacer()
+                .frame(width: 80)
+                Text(currencyUnit)
+                Menu("货币单位") {
+                    ForEach(validCurrencyModels, id: \.self) { currencyModel in
+                        if let currencyUnit = currencyModel.AlphabeticCode {
+                            Button(currencyUnit) {
+                                self.currencyUnit = currencyUnit
+                            }
+                        }
+                    }
+                }.menuStyle(.borderedButton)
+//                Spacer()
                 Text("一个月工作 ")
                 TextField("这条子够长了吧", text: Binding<String>(get: {
                     String(dayWorkOfMonth)
                 }, set: { str in
                     dayWorkOfMonth = Int(str) ?? 0
                 }))
-                .frame(width: 50)
+                .frame(width: 40)
                 Text("天")
             }
             .font(.system(.subheadline, design: .rounded))
             .frame(maxWidth: 400)
             let descriptionText = """
                             这么看来，假设一个月工作 \(dayWorkOfMonth) 天！\n \
-                            您一天能挣 \(formattedRMBPerDay) 元！\n \
+                            您一天能挣 \(formattedRMBPerDay) \(currencyUnit)！\n \
                             您一天有效工时 \(workHours) 小时！\n \
-                            您一秒钟能挣 \(formattedRMBPerSecond) 元
+                            您一秒钟能挣 \(formattedRMBPerSecond) \(currencyUnit)!
             """
             Text(descriptionText)
                 .frame(width: 700, height: 80, alignment: .center)

@@ -30,6 +30,9 @@ class Menubar: ObservableObject {
     var noonBreakStartTimeStamp: Double = 0
     @AppStorage("wiki.qaq.noonBreakEndTimeStamp")
     var noonBreakEndTimeStamp: Double = 0
+    
+    @AppStorage("wiki.qaq.currencyUnit")
+    var currencyUnit: String = "RMB"
 
     @Published var menubarRunning = false
     @Published var todayPercent: Double = 0
@@ -160,7 +163,7 @@ class Menubar: ObservableObject {
         } else if percent >= 1 {
             statusItem.button?.title = String(format: "💰 下班啦，今日 %.0f 到手", money)
         } else {
-            statusItem.button?.title = String(format: "💰 您今日已挣 %.4f 元", money)
+            statusItem.button?.title = String(format: "💰 您今日已挣 %.4f %@", money, currencyUnit)
         }
     }
 
