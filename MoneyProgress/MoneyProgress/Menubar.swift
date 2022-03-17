@@ -31,6 +31,9 @@ class Menubar: ObservableObject {
     @AppStorage("wiki.qaq.noonBreakEndTimeStamp")
     var noonBreakEndTimeStamp: Double = 0
 
+    @AppStorage("wiki.qaq.compactMode")
+    var compactMode: Bool = false
+
     @Published var menubarRunning = false
     @Published var todayPercent: Double = 0
     @Published var todayEarn: Int = 0
@@ -154,14 +157,16 @@ class Menubar: ObservableObject {
 
         todayPercent = percent
         todayEarn = Int(todayMake)
+        var title = ""
 
         if percent <= 0 {
-            statusItem.button?.title = "💰 暂未开工"
+            title = "💰 暂未开工"
         } else if percent >= 1 {
-            statusItem.button?.title = String(format: "💰 下班啦，今日 %.0f 到手", money)
+            title = String(format: compactMode ? "💰 %.0f 到手" : "💰 下班啦，今日 %.0f 到手", money)
         } else {
-            statusItem.button?.title = String(format: "💰 您今日已挣 %.4f 元", money)
+            title = String(format: compactMode ? "💰 %.4f 元" : "💰 您今日已挣 %.4f 元", money)
         }
+        statusItem.button?.title = title
     }
 
     func reload() {
