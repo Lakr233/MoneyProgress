@@ -19,7 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5005054E27DF837900B04FC9 /* MoneyProgress.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoneyProgress.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5005054E27DF837900B04FC9 /* 钱条.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "钱条.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5005055127DF837900B04FC9 /* MoneyProgressApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyProgressApp.swift; sourceTree = "<group>"; };
 		5005055327DF837900B04FC9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5005055527DF837A00B04FC9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -57,7 +57,7 @@
 		5005054F27DF837900B04FC9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5005054E27DF837900B04FC9 /* MoneyProgress.app */,
+				5005054E27DF837900B04FC9 /* 钱条.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -106,9 +106,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5005054D27DF837900B04FC9 /* MoneyProgress */ = {
+		5005054D27DF837900B04FC9 /* 钱条 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5005055D27DF837A00B04FC9 /* Build configuration list for PBXNativeTarget "MoneyProgress" */;
+			buildConfigurationList = 5005055D27DF837A00B04FC9 /* Build configuration list for PBXNativeTarget "钱条" */;
 			buildPhases = (
 				5005054A27DF837900B04FC9 /* Sources */,
 				5005054B27DF837900B04FC9 /* Frameworks */,
@@ -118,12 +118,12 @@
 			);
 			dependencies = (
 			);
-			name = MoneyProgress;
+			name = "钱条";
 			packageProductDependencies = (
 				5005056227DF879300B04FC9 /* Colorful */,
 			);
 			productName = MoneyProgress;
-			productReference = 5005054E27DF837900B04FC9 /* MoneyProgress.app */;
+			productReference = 5005054E27DF837900B04FC9 /* 钱条.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -154,7 +154,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5005054D27DF837900B04FC9 /* MoneyProgress */,
+				5005054D27DF837900B04FC9 /* 钱条 */,
 			);
 		};
 /* End PBXProject section */
@@ -328,7 +328,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = wiki.qaq.MoneyProgress;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -361,7 +361,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = wiki.qaq.MoneyProgress;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -381,7 +381,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5005055D27DF837A00B04FC9 /* Build configuration list for PBXNativeTarget "MoneyProgress" */ = {
+		5005055D27DF837A00B04FC9 /* Build configuration list for PBXNativeTarget "钱条" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5005055E27DF837A00B04FC9 /* Debug */,
