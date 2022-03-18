@@ -37,6 +37,8 @@
 		F4099B5527E323A000659675 /* ISO_4217_Currency _Codes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "ISO_4217_Currency _Codes.json"; sourceTree = "<group>"; };
 		F4099B5827E32D2900659675 /* CurrencyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyModel.swift; sourceTree = "<group>"; };
 		F4099B5A27E32DB700659675 /* CurrencyModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyModelData.swift; sourceTree = "<group>"; };
+		F4AFC77727E4D3AA009EA38C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F4AFC77827E4D3AD009EA38C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,9 +157,9 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
 				"zh-Hant",
 				"zh-Hans",
+				Base,
 			);
 			mainGroup = 5005054527DF837900B04FC9;
 			productRefGroup = 5005054F27DF837900B04FC9 /* Products */;
@@ -205,6 +207,7 @@
 			children = (
 				6CFBB78427E3845300A324A8 /* zh-Hant */,
 				50B3662B27E41DB9004643E8 /* zh-Hans */,
+				F4AFC77827E4D3AD009EA38C /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -214,6 +217,7 @@
 			children = (
 				6CFBB78727E3845300A324A8 /* zh-Hant */,
 				50B3662A27E41CEE004643E8 /* zh-Hans */,
+				F4AFC77727E4D3AA009EA38C /* en */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

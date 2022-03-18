@@ -1,0 +1,104 @@
+/* No comment provided by engineer. */
+"💰 %.0f available" = "💰 %.0f available";
+
+/* No comment provided by engineer. */
+"💰 %.4f yuan" = "💰 %.4f %@";
+
+/* No comment provided by engineer. */
+"💰 You have earned %.4f %@ today" = "💰 You have earned %.4f %@ today";
+
+/* No comment provided by engineer. */
+"💰 data error" = "💰 data error";
+
+/* No comment provided by engineer. */
+"💰" = "💰";
+
+/* No comment provided by engineer. */
+"💰 How many days do you work in a month? Please check if your working days are reasonable." = "💰 How many days do you work in a month?";
+
+/* No comment provided by engineer. */
+"💰 Make negative money, what work do you work? Please check if your salary is negative." = "💰 Earn negative money, what work do you work?";
+
+/* No comment provided by engineer. */
+"one month's work" = "one month's work";
+
+/* No comment provided by engineer. */
+"days" = "days";
+
+/* No comment provided by engineer. */
+"work at" = "work at";
+
+/* No comment provided by engineer. */
+"off work on" = "off work on ";
+
+/* No comment provided by engineer. */
+"Today's Progress" = "Today's Progress";
+
+/* No comment provided by engineer. */
+"No work started today!" = "No work started today";
+
+/* No comment provided by engineer. */
+"Remove from status bar!" = "Tear off from status bar!";
+
+/* No comment provided by engineer. */
+"Lunch break starts at " = "Lunch break starts at ";
+
+/* No comment provided by engineer. */
+"Lunch break ends at" = "Lunch break ends at ";
+
+/* No comment provided by engineer. */
+"day" = "day";
+
+/* No comment provided by engineer. */
+"monthly salary" = "monthly salary";
+
+/* No comment provided by engineer. */
+"Hang on the status bar to start pricing!" = "Hang on the status bar to start pricing!";
+
+/* No comment provided by engineer. */
+"Cancel" = "Cancel";
+
+/* No comment provided by engineer. */
+"So, let's say you work %lld days in a month:" = "So let's say you work %lld days in a month:";
+
+/* No comment provided by engineer. */
+"This piece is long enough" = "This piece is long enough";
+
+/* No comment provided by engineer. */
+"Restore Default (9 to 6 CNY)" = "Restore Default (9 to 6 CNY)";
+
+/* No comment provided by engineer. */
+"The progress bar for earning money must be an IOU from my boss." = "The progress bar for earning money must be an IOU from my boss.";
+
+/* No comment provided by engineer. */
+"Is there a lunch break" = "Is there a lunch break";
+
+/* No comment provided by engineer. */
+"compact mode" = "compact mode";
+
+/* No comment provided by engineer. */
+"Select Currency Type" = "Select Currency Type";
+
+/* No comment provided by engineer. */
+"money progress" = "money progress";
+
+/* No comment provided by engineer. */
+"Expected to make a total of today's money %lld %@" = "Estimated to make a total of today's money %lld %@";
+
+/* No comment provided by engineer. */
+"Your effective working hours per day are %@ hours!" = "Your effective working hours per day are %@ hours!";
+
+/* No comment provided by engineer. */
+"You can earn %@ %@ a day!" = "You can earn %@ %@ a day!";
+
+/* No comment provided by engineer. */
+"You can earn %@ %@ in one second" = "You can earn %@ %@ in one second";
+
+/* No comment provided by engineer. */
+"You have earned your full salary today!" = "You have earned your full salary today!";
+
+/* No comment provided by engineer. */
+"This is it?" = "This is it?";
+
+/* No comment provided by engineer. */
+"search" = "search";

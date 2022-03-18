@@ -113,7 +113,7 @@ class Menubar: ObservableObject {
         }
 
         if totalWorkTimeInterval <= 0 {
-            statusItem.button?.title = NSLocalizedString("💰 数据错误", comment: "")
+            statusItem.button?.title = NSLocalizedString("💰 data error", comment: "")
             return
         }
         let calendar = Calendar.current
@@ -130,7 +130,7 @@ class Menubar: ObservableObject {
         ).date
 
         guard let todayStart = todayStart else {
-            statusItem.button?.title = NSLocalizedString("💰 数据错误", comment: "")
+            statusItem.button?.title = NSLocalizedString("💰 data error", comment: "")
             return
         }
 
@@ -167,12 +167,12 @@ class Menubar: ObservableObject {
         if percent <= 0 {
             title = "💰 暂未开工"
         } else if percent >= 1 {
-            title = String(format: NSLocalizedString("💰 %.0f 到手", comment: ""), money)
+            title = String(format: NSLocalizedString("💰 %.0f available", comment: ""), money)
         } else {
             if compactMode {
-                title = String(format: NSLocalizedString("💰 %.4f 元", comment: ""), money, currencyUnit)
+                title = String(format: NSLocalizedString("💰 %.4f yuan", comment: ""), money, currencyUnit)
             } else {
-                title = String(format: NSLocalizedString("💰 您今日已挣 %.4f %@", comment: ""), money, currencyUnit)
+                title = String(format: NSLocalizedString("💰 You have earned %.4f %@ today", comment: ""), money, currencyUnit)
             }
         }
         statusItem.button?.title = title

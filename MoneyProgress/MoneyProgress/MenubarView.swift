@@ -39,17 +39,17 @@ struct MenubarView: View {
                 .font(.largeTitle)
             Group {
                 if menubar.todayPercent <= 0 {
-                    Text("今日暂未开工！")
+                    Text("No work started today!")
                 } else if menubar.todayPercent >= 0 {
                     Text(currentTitle)
                 } else {
-                    Text("您已挣到今天的全部薪酬！")
+                    Text("You have earned your full salary today!")
                 }
             }
             .font(.headline)
 
             HStack {
-                Text("今日进度")
+                Text("Today's Progress")
                 Spacer()
                 Text(String(format: "%.4f", menubar.todayPercent * 100))
                 Text("%")
