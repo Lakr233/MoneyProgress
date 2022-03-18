@@ -14,10 +14,10 @@
 "💰" = "💰";
 
 /* No comment provided by engineer. */
-"💰 您一个月到底工作几天？请检查自己的工作天数是否合理。" = "💰 您一个月到底工作几天？请检查自己的工作天数是否合理。";
+"💰 您一个月到底工作几天？请检查自己的工作天数是否合理。" = "💰 您一个月到底工作几天？";
 
 /* No comment provided by engineer. */
-"💰 赚钱为负，上什么班？请检查自己的工资是否为负。" = "💰 赚钱为负，上什么班？请检查自己的工资是否为负。";
+"💰 赚钱为负，上什么班？请检查自己的工资是否为负。" = "💰 挣负数的钱，上什么班？";
 
 /* No comment provided by engineer. */
 "一个月工作 " = "一个月工作 ";
@@ -26,19 +26,19 @@
 "几天" = "几天";
 
 /* No comment provided by engineer. */
-"上班于" = "上班于";
+"上班于" = "上班于 ";
 
 /* No comment provided by engineer. */
-"下班于" = "下班于";
+"下班于" = "下班于 ";
 
 /* No comment provided by engineer. */
 "今日进度" = "今日进度";
 
 /* No comment provided by engineer. */
-"今日暂未开工！" = "今日暂未开工！";
+"今日暂未开工！" = "今日暂未开工";
 
 /* No comment provided by engineer. */
-"从状态栏撤下来！" = "从状态栏撤下来！";
+"从状态栏撤下来！" = "从状态栏扯下来！";
 
 /* No comment provided by engineer. */
 "午休开始于 " = "午休开始于 ";
