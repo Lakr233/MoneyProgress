@@ -135,7 +135,9 @@ class Menubar: ObservableObject {
         }
 
         var passed = 1.0
-        if isHaveNoonBreak {
+        // check if after noon break start
+        let afterNoonBreak = now.timeIntervalSince(noonBreakStartDate) > 0
+        if isHaveNoonBreak, afterNoonBreak {
             // interval = (now - noonBreakEndDate) + (noonBreakStartDate - workStartDate)
             passed = now.timeIntervalSince(noonBreakEndDate) + noonBreakStartDate.timeIntervalSince(workStartDate)
         } else {
