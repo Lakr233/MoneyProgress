@@ -10,6 +10,7 @@ import SwiftUI
 @main
 struct MoneyProgressApp: App {
     init() {
+        _ = currencyModels
         let timer = Timer(timeInterval: 1, repeats: true) { _ in
             checkWindow()
         }
@@ -18,7 +19,12 @@ struct MoneyProgressApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView().onAppear { let _ = Menubar.shared }
+            ContentView()
+                .frame(
+                    minWidth: 800, idealWidth: 800, maxWidth: .infinity,
+                    minHeight: 500, idealHeight: 500, maxHeight: .infinity
+                )
+                .onAppear { let _ = Menubar.shared }
         }
         .windowStyle(HiddenTitleBarWindowStyle())
     }

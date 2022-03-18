@@ -5,155 +5,185 @@
 //  Created by Lakr Aream on 2022/3/14.
 //
 
+import AppKit
 import Colorful
 import SwiftUI
 
 struct ContentView: View {
     // store timestamp at 1970.1.1
     // we are using the time components only
-    
+
     @AppStorage("wiki.qaq.workStart")
     var __workStart: Double = 0
     @AppStorage("wiki.qaq.workEnd")
     var __workEnd: Double = 0
-    
+
     @AppStorage("wiki.qaq.noonBreakStartTimeStamp")
     var __noonBreakStartTimeStamp: Double = 0
     @AppStorage("wiki.qaq.noonBreakEndTimeStamp")
     var __noonBreakEndTimeStamp: Double = 0
-    
+
     @AppStorage("wiki.qaq.monthPaid")
     var __monthPaid: Int = 3000
-    
+
     @AppStorage("wiki.qaq.dayWorkOfMonth")
     var __dayWorkOfMonth: Int = 20
-    
+
     @AppStorage("wiki.qaq.isHaveNoonBreak")
     var __isHaveNoonBreak: Bool = false
 
     @AppStorage("wiki.qaq.compactMode")
     var compactMode: Bool = false
-    
+
     @AppStorage("wiki.qaq.currencyUnit")
-    var __currencyUnit: String = "RMB"
-    
+    var __currencyUnit: String = "CNY"
+
     @State var workStartTimeStamp: Double = 0
     @State var workEndTimeStamp: Double = 0
-    
-    @State private var workStartDate: Date = Date()
-    @State private var workEndDate: Date = Date()
-    
-    @State private var noonBreakStartDate: Date = Date()
-    @State private var noonBreakEndDate: Date = Date()
-    
+
+    @State private var workStartDate: Date = .init()
+    @State private var workEndDate: Date = .init()
+
+    @State private var noonBreakStartDate: Date = .init()
+    @State private var noonBreakEndDate: Date = .init()
+
     @State var monthPaid: Int = 0
     @State var sliderWidth: CGFloat = 0
     @State var dayWorkOfMonth: Int = 20
-    
+
     @StateObject var menubar = Menubar.shared
-    
+
     @State private var isHaveNoonBreak: Bool = false
     @State private var isShowAlert = false
     @State private var isMoneyInvalid = false
     @State private var isWorkDayInvalid = false
-    
-    @State private var currencyUnit = "RMB"
-    
+
+    @State private var currencyUnit = "CNY"
+
+    @State private var openCoinTypePicker = false
+
     var body: some View {
-        
         ZStack {
             ColorfulView(
                 colors: [Color.accentColor],
                 colorCount: 4
             )
-            .opacity(0.25)
+            .opacity(0.1)
             appIntro
                 .padding()
         }
-        .frame(width: 700, height: 500, alignment: .center)
+        .animation(.interactiveSpring(), value: isHaveNoonBreak)
+        .overlay(
+            HStack {
+                VStack(alignment: .leading, spacing: 5) {
+                    Spacer()
+                    Text("这么看来，假设一个月工作 \(dayWorkOfMonth) 天：")
+                    Text("您一天能挣 \(formattedCoinPerDay) \(currencyUnit)！")
+                    Text("您一天有效工时 \(workHours) 小时！")
+                    Text("您一秒钟能挣 \(formattedCoinPerSecond) \(currencyUnit)")
+                }
+                .font(.system(.caption, design: .rounded))
+                .lineLimit(1)
+                Spacer()
+                VStack {
+                    Spacer()
+                    HStack {
+                        Toggle(isOn: $compactMode) {
+                            Text("紧凑模式")
+                        }
+                        Button {
+                            fillInitialData()
+                        } label: {
+                            Label("恢复默认（朝九晚六 CNY）", systemImage: "arrow.counterclockwise")
+                        }
+                    }
+                }
+            }
+            .padding()
+        )
         .onAppear {
             if __workStart == 0 || __workEnd == 0 {
                 fillInitialData()
             } else {
                 workStartTimeStamp = __workStart
                 workEndTimeStamp = __workEnd
-                workStartDate = Date.init(timeIntervalSince1970: __workStart)
-                workEndDate = Date.init(timeIntervalSince1970: __workEnd)
-                noonBreakStartDate = Date.init(timeIntervalSince1970: __noonBreakStartTimeStamp)
-                noonBreakEndDate = Date.init(timeIntervalSince1970: __noonBreakEndTimeStamp)
+                workStartDate = Date(timeIntervalSince1970: __workStart)
+                workEndDate = Date(timeIntervalSince1970: __workEnd)
+                noonBreakStartDate = Date(timeIntervalSince1970: __noonBreakStartTimeStamp)
+                noonBreakEndDate = Date(timeIntervalSince1970: __noonBreakEndTimeStamp)
                 monthPaid = __monthPaid
                 isHaveNoonBreak = __isHaveNoonBreak
                 currencyUnit = __currencyUnit
             }
         }
-        .onChange(of: workStartDate) { newValue in
-            __workStart = newValue.timeIntervalSince1970
-            Menubar.shared.reload()
-        }
-        .onChange(of: workEndDate) { newValue in
-            __workEnd = newValue.timeIntervalSince1970
-            Menubar.shared.reload()
-        }
-        .onChange(of: noonBreakStartDate) { newValue in
-            __noonBreakStartTimeStamp = newValue.timeIntervalSince1970
-            Menubar.shared.reload()
-        }
-        .onChange(of: noonBreakEndDate) { newValue in
-            __noonBreakEndTimeStamp = newValue.timeIntervalSince1970
-            Menubar.shared.reload()
-        }
-        .onChange(of: monthPaid) { newValue in
-            __monthPaid = newValue
-            if newValue < 0 {
-                self.isMoneyInvalid = true
-            } else {
-                self.isMoneyInvalid = false
-            }
-            Menubar.shared.reload()
-        }
-        .onChange(of: dayWorkOfMonth) { newValue in
-            __dayWorkOfMonth = newValue
-            if newValue <= 0 || newValue >= 32 {
-                self.isWorkDayInvalid = true
-            } else {
-                self.isWorkDayInvalid = false
-            }
-            Menubar.shared.reload()
-        }
-        .onChange(of: isHaveNoonBreak) { newValue in
-            __isHaveNoonBreak = newValue
-            Menubar.shared.reload()
-        }
-        .onChange(of: currencyUnit) { newValue in
-            __currencyUnit = newValue
-            Menubar.shared.reload()
-        }
+        .background(
+            dataListener
+        )
     }
-    
+
+    var dataListener: some View {
+        Group {}
+            .onChange(of: workStartDate) { newValue in
+                __workStart = newValue.timeIntervalSince1970
+                Menubar.shared.reload()
+            }
+            .onChange(of: workEndDate) { newValue in
+                __workEnd = newValue.timeIntervalSince1970
+                Menubar.shared.reload()
+            }
+            .onChange(of: noonBreakStartDate) { newValue in
+                __noonBreakStartTimeStamp = newValue.timeIntervalSince1970
+                Menubar.shared.reload()
+            }
+            .onChange(of: noonBreakEndDate) { newValue in
+                __noonBreakEndTimeStamp = newValue.timeIntervalSince1970
+                Menubar.shared.reload()
+            }
+            .onChange(of: monthPaid) { newValue in
+                __monthPaid = newValue
+                if newValue < 0 {
+                    self.isMoneyInvalid = true
+                } else {
+                    self.isMoneyInvalid = false
+                }
+                Menubar.shared.reload()
+            }
+            .onChange(of: dayWorkOfMonth) { newValue in
+                __dayWorkOfMonth = newValue
+                if newValue <= 0 || newValue >= 32 {
+                    self.isWorkDayInvalid = true
+                } else {
+                    self.isWorkDayInvalid = false
+                }
+                Menubar.shared.reload()
+            }
+            .onChange(of: isHaveNoonBreak) { newValue in
+                __isHaveNoonBreak = newValue
+                Menubar.shared.reload()
+            }
+            .onChange(of: currencyUnit) { newValue in
+                __currencyUnit = newValue
+                Menubar.shared.reload()
+            }
+    }
+
     func fillInitialData() {
         let date = Date()
-        
-        workStartTimeStamp = self.getTodayDate(hour: 9)?.timeIntervalSince1970 ?? 0
-        workStartDate = self.getTodayDate(hour: 9) ?? date
-        
-        noonBreakStartDate = self.getTodayDate(hour: 12) ?? date
-        
-        noonBreakEndDate = self.getTodayDate(hour: 14) ?? date
-        
-        workEndTimeStamp = self.getTodayDate(hour: 18)?.timeIntervalSince1970 ?? 0
-        workEndDate = self.getTodayDate(hour: 18) ?? date
-        
+        workStartTimeStamp = getTodayDate(hour: 9)?.timeIntervalSince1970 ?? 0
+        workStartDate = getTodayDate(hour: 9) ?? date
+        noonBreakStartDate = getTodayDate(hour: 12) ?? date
+        noonBreakEndDate = getTodayDate(hour: 14) ?? date
+        workEndTimeStamp = getTodayDate(hour: 18)?.timeIntervalSince1970 ?? 0
+        workEndDate = getTodayDate(hour: 18) ?? date
         isHaveNoonBreak = false
-        
         dayWorkOfMonth = 20
-        
-        currencyUnit = "RMB"
+        currencyUnit = "CNY"
     }
-    
+
     func getTodayDate(hour: Int, minute: Int = 0, second: Int = 0) -> Date? {
         let date = Date()
         let calendar = Calendar.current
-        
+
         let dateComponents = DateComponents(
             calendar: Calendar.current,
             year: calendar.component(.year, from: date),
@@ -165,7 +195,7 @@ struct ContentView: View {
         )
         return dateComponents.date
     }
-    
+
     var rmbPerSecond: Double {
         var timeInterval: TimeInterval = 1
         if isHaveNoonBreak {
@@ -177,10 +207,10 @@ struct ContentView: View {
         }
         debugPrint(timeInterval)
         return Double(monthPaid)
-        / Double(dayWorkOfMonth) /* days */
-        / timeInterval /* second each day */
+            / Double(dayWorkOfMonth) /* days */
+            / timeInterval /* second each day */
     }
-    
+
     var workHours: String {
         var timeInterval: TimeInterval = 0
         if isHaveNoonBreak {
@@ -189,21 +219,21 @@ struct ContentView: View {
             timeInterval = workEndDate.timeIntervalSince(workStartDate)
         }
         let hours = timeInterval / 3600.0
-        return String.init(format: "%.1f", hours)
+        return String(format: "%.1f", hours)
     }
-    
-    var formattedRMBPerSecond: String {
-        return String.init(format: "%.4f", self.rmbPerSecond)
+
+    var formattedCoinPerSecond: String {
+        String(format: "%.4f", rmbPerSecond)
     }
-    
+
     var rmbPerDay: Double {
-        return Double(monthPaid) / Double(dayWorkOfMonth)
+        Double(monthPaid) / Double(dayWorkOfMonth)
     }
-    
-    var formattedRMBPerDay: String {
-        return String.init(format: "%.2f", self.rmbPerDay)
+
+    var formattedCoinPerDay: String {
+        String(format: "%.2f", rmbPerDay)
     }
-        
+
     var appIntro: some View {
         VStack(alignment: .center, spacing: 15) {
             Image("avatar")
@@ -229,18 +259,17 @@ struct ContentView: View {
                 }))
                 .frame(width: 80)
                 Text(currencyUnit)
-                Menu("货币单位") {
-                    ForEach(validCurrencyModels, id: \.self) { currencyModel in
-                        if let currencyUnit = currencyModel.AlphabeticCode {
-                            Button(currencyUnit) {
-                                self.currencyUnit = currencyUnit
-                            }
+                    .underline()
+                    .onTapGesture { openCoinTypePicker = true }
+                    .sheet(isPresented: $openCoinTypePicker, onDismiss: nil, content: {
+                        CoinTypePicker {
+                            currencyUnit
+                        } onComplete: { setUnit in
+                            currencyUnit = setUnit
                         }
-                    }
-                }.menuStyle(.borderedButton)
-//                Spacer()
+                    })
                 Text("一个月工作 ")
-                TextField("这条子够长了吧", text: Binding<String>(get: {
+                TextField("几天", text: Binding<String>(get: {
                     String(dayWorkOfMonth)
                 }, set: { str in
                     dayWorkOfMonth = Int(str) ?? 0
@@ -250,24 +279,12 @@ struct ContentView: View {
             }
             .font(.system(.subheadline, design: .rounded))
             .frame(maxWidth: 400)
-            let descriptionText = """
-                            这么看来，假设一个月工作 \(dayWorkOfMonth) 天！\n \
-                            您一天能挣 \(formattedRMBPerDay) \(currencyUnit)！\n \
-                            您一天有效工时 \(workHours) 小时！\n \
-                            您一秒钟能挣 \(formattedRMBPerSecond) \(currencyUnit)!
-            """
-            Text(descriptionText)
-                .frame(width: 700, height: 80, alignment: .center)
-                .font(.system(.headline, design: .rounded))
-                .lineLimit(4)
-            
-            
             Button {
                 if isMoneyInvalid || isWorkDayInvalid {
                     isShowAlert = true
                     return
                 }
-                
+
                 if menubar.menubarRunning {
                     menubar.stop()
                 } else {
@@ -293,31 +310,11 @@ struct ContentView: View {
                     )
                 }
             }
-
-            Toggle(isOn: $compactMode) {
-              Text("紧凑模式")
-            }
-            
             Spacer()
-            
-            HStack {
-                Spacer()
-                Button {
-                    fillInitialData()
-                } label: {
-                    Image(systemName: "arrow.counterclockwise")
-                        .foregroundColor(.accentColor)
-                    Text("恢复默认（朝九晚六）")
-                        .fontWeight(.semibold)
-                        .font(.title2)
-                        .foregroundColor(.accentColor)
-                }
-                .buttonStyle(PlainButtonStyle())
-                .padding(.trailing, 44)
-            }
+                .frame(height: 50)
         }
     }
-    
+
     func twoDigit(_ i: Int) -> String {
         if i < 10 {
             return "0\(i)"
@@ -325,7 +322,7 @@ struct ContentView: View {
             return String(i)
         }
     }
-    
+
     var offsetForBegin: CGFloat {
         let percent = Date(timeIntervalSince1970: workStartTimeStamp)
             .minSinceMidnight / (24 * 60)
@@ -333,7 +330,7 @@ struct ContentView: View {
         debugPrint(ret)
         return ret
     }
-    
+
     var offsetForEnd: CGFloat {
         let percent = Date(timeIntervalSince1970: workEndTimeStamp)
             .minSinceMidnight / (24 * 60)
@@ -341,13 +338,13 @@ struct ContentView: View {
         debugPrint(ret)
         return ret
     }
-    
+
     var minPerPixel: CGFloat {
         let ret: CGFloat = 24 * 60 / sliderWidth
         debugPrint("minPerPixel: \(ret)")
         return ret
     }
-    
+
     var progressBar: some View {
         VStack {
             GeometryReader { r in
@@ -366,7 +363,7 @@ struct ContentView: View {
                                 Spacer()
                             }
                         }
-                            .frame(maxWidth: .infinity)
+                        .frame(maxWidth: .infinity)
                     )
                     .overlay(
                         Rectangle()
@@ -382,7 +379,7 @@ struct ContentView: View {
                                         let mins = Double(shift * minPerPixel)
                                         let newStamp = updateDate(minsFromMidnight: mins)
                                         workStartTimeStamp = newStamp
-                                        workStartDate = Date.init(timeIntervalSince1970: newStamp)
+                                        workStartDate = Date(timeIntervalSince1970: newStamp)
                                     }
                             )
                     )
@@ -400,7 +397,7 @@ struct ContentView: View {
                                         let mins = Double(shift * minPerPixel)
                                         let newStamp = updateDate(minsFromMidnight: mins)
                                         workEndTimeStamp = newStamp
-                                        workEndDate = Date.init(timeIntervalSince1970: newStamp)
+                                        workEndDate = Date(timeIntervalSince1970: newStamp)
                                     }
                             )
                     )
@@ -426,7 +423,7 @@ struct ContentView: View {
                     .toggleStyle(.checkbox)
                 Spacer()
             }
-            
+
             if isHaveNoonBreak {
                 HStack {
                     DatePicker("午休开始于 ", selection: $noonBreakStartDate, displayedComponents: .hourAndMinute)
@@ -437,7 +434,7 @@ struct ContentView: View {
             }
         }
     }
-    
+
     func updateDate(minsFromMidnight mins: Double) -> Double {
         let date = Date()
         let calendar = Calendar.current
@@ -452,7 +449,7 @@ struct ContentView: View {
         )
         return comps.date?.timeIntervalSince1970 ?? 0
     }
-    
+
     func createTimeDescription(_ from: Double) -> String {
         let fmt = DateFormatter()
         fmt.dateStyle = .none // set as desired
@@ -469,12 +466,77 @@ extension Date {
     var minSinceMidnight: Double {
         let calendar = Calendar.current
         return Double(calendar.component(.hour, from: self) * 60
-                      + calendar.component(.minute, from: self))
+            + calendar.component(.minute, from: self))
     }
 }
 
 struct MainPreview: PreviewProvider {
     static var previews: some View {
         ContentView()
+    }
+}
+
+struct CoinTypePicker: View {
+    @Environment(\.presentationMode) var presentationMode
+
+    let onLoad: () -> (String)
+    let onComplete: (String) -> Void
+
+    var gridItem = [GridItem(.adaptive(minimum: 45, maximum: 75))]
+
+    @State var unit: String = ""
+
+    @State var search: String = ""
+
+    var body: some View {
+        VStack(spacing: 10) {
+            HStack {
+                Text("选择货币种类")
+                    .font(.system(.headline, design: .rounded))
+                Spacer()
+            }
+            Divider()
+            HStack {
+                Text("搜索")
+                TextField("", text: $search)
+            }
+            ScrollView {
+                LazyVGrid(columns: gridItem, alignment: .center) {
+                    ForEach(currencyModels, id: \.self) { item in
+                        if search.isEmpty || item.AlphabeticCode.lowercased().contains(search.lowercased()) {
+                            Text(item.AlphabeticCode)
+                                .underline()
+                                .font(.system(.subheadline, design: .rounded))
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                .padding(4)
+                                .background(Color.accentColor.opacity(0.1))
+                                .cornerRadius(4)
+                                .onTapGesture {
+                                    onComplete(item.AlphabeticCode)
+                                    presentationMode.wrappedValue.dismiss()
+                                }
+                                .onHover { h in
+                                    if h {
+                                        NSCursor.pointingHand.push()
+                                    } else {
+                                        NSCursor.pop()
+                                    }
+                                }
+                        }
+                    }
+                }
+            }
+            Divider()
+            HStack {
+                Button {
+                    presentationMode.wrappedValue.dismiss()
+                } label: {
+                    Text("取消")
+                }
+                Spacer()
+            }
+        }
+        .padding()
+        .frame(width: 600, height: 400, alignment: .center)
     }
 }

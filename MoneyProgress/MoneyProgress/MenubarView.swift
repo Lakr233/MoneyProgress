@@ -17,7 +17,7 @@ struct MenubarView: View {
     ]
 
     let currentTitle: String
-    
+
     @AppStorage("wiki.qaq.currencyUnit")
     var currencyUnit: String = "RMB"
 

@@ -22,15 +22,15 @@ class Menubar: ObservableObject {
 
     @AppStorage("wiki.qaq.dayWorkOfMonth")
     var dayWorkOfMonth: Int = 20
-    
+
     @AppStorage("wiki.qaq.isHaveNoonBreak")
     var isHaveNoonBreak: Bool = false
-    
+
     @AppStorage("wiki.qaq.noonBreakStartTimeStamp")
     var noonBreakStartTimeStamp: Double = 0
     @AppStorage("wiki.qaq.noonBreakEndTimeStamp")
     var noonBreakEndTimeStamp: Double = 0
-    
+
     @AppStorage("wiki.qaq.currencyUnit")
     var currencyUnit: String = "RMB"
 
@@ -97,12 +97,12 @@ class Menubar: ObservableObject {
         guard let statusItem = statusItem else {
             return
         }
-        
+
         let workStartDate = Date(timeIntervalSince1970: workStart)
         let workEndDate = Date(timeIntervalSince1970: workEnd)
         let noonBreakStartDate = Date(timeIntervalSince1970: noonBreakStartTimeStamp)
         let noonBreakEndDate = Date(timeIntervalSince1970: noonBreakEndTimeStamp)
-        
+
         var totalWorkTimeInterval: TimeInterval = 1
         if isHaveNoonBreak {
             // interval = (workEndDate - noonBreakEndDate) + (noonBreakStartDate - workStartDate)
@@ -111,9 +111,9 @@ class Menubar: ObservableObject {
             // interval = workEndDate - workStartDate
             totalWorkTimeInterval = workEndDate.timeIntervalSince(workStartDate)
         }
-        
+
         if totalWorkTimeInterval <= 0 {
-            statusItem.button?.title = "💰 数据错误"
+            statusItem.button?.title = NSLocalizedString("💰 数据错误", comment: "")
             return
         }
         let calendar = Calendar.current
@@ -130,12 +130,14 @@ class Menubar: ObservableObject {
         ).date
 
         guard let todayStart = todayStart else {
-            statusItem.button?.title = "💰 数据错误"
+            statusItem.button?.title = NSLocalizedString("💰 数据错误", comment: "")
             return
         }
 
         var passed = 1.0
-        if isHaveNoonBreak {
+        // check if after noon break start
+        let afterNoonBreak = now.timeIntervalSince(noonBreakStartDate) > 0
+        if isHaveNoonBreak, afterNoonBreak {
             // interval = (now - noonBreakEndDate) + (noonBreakStartDate - workStartDate)
             passed = now.timeIntervalSince(noonBreakEndDate) + noonBreakStartDate.timeIntervalSince(workStartDate)
         } else {
@@ -165,9 +167,13 @@ class Menubar: ObservableObject {
         if percent <= 0 {
             title = "💰 暂未开工"
         } else if percent >= 1 {
-            title = String(format: compactMode ? "💰 %.0f 到手" : "💰 下班啦，今日 %.0f 到手", money)
+            title = String(format: NSLocalizedString("💰 %.0f 到手", comment: ""), money)
         } else {
-            title = String(format: compactMode ? "💰 %.4f %@" : "💰 您今日已挣 %.4f %@", money, currencyUnit)
+            if compactMode {
+                title = String(format: NSLocalizedString("💰 %.4f 元", comment: ""), money, currencyUnit)
+            } else {
+                title = String(format: NSLocalizedString("💰 您今日已挣 %.4f %@", comment: ""), money, currencyUnit)
+            }
         }
         statusItem.button?.title = title
     }
