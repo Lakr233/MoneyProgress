@@ -2,10 +2,10 @@
 "💰" = "💰";
 
 /* No comment provided by engineer. */
-"💰 您一个月到底工作几天？请检查自己的工作天数是否合理。" = "💰 您一個月到底工作幾天？請檢查自己的工作天數是否合理。";
+"💰 您一个月到底工作几天？请检查自己的工作天数是否合理。" = "💰 您一個月到底工作幾天？";
 
 /* No comment provided by engineer. */
-"💰 赚钱为负，上什么班？请检查自己的工资是否为负。" = "💰 賺錢為負，上什麼班？請檢查自己的工資是否為負。";
+"💰 赚钱为负，上什么班？请检查自己的工资是否为负。" = "💰 賺錢為負，上什麼班？";
 
 /* No comment provided by engineer. */
 "一个月工作 " = "一個月工作";
@@ -14,16 +14,16 @@
 "几天" = "幾天";
 
 /* No comment provided by engineer. */
-"上班于" = "上班於";
+"上班于" = "上班於 ";
 
 /* No comment provided by engineer. */
-"下班于" = "下班於";
+"下班于" = "下班於 ";
 
 /* No comment provided by engineer. */
 "今日进度" = "今天進度";
 
 /* No comment provided by engineer. */
-"今日暂未开工！" = "今天尚未開工！";
+"今日暂未开工！" = "今天尚未開工";
 
 /* No comment provided by engineer. */
 "从状态栏撤下来！" = "從狀態列撤下來！";
@@ -98,7 +98,7 @@
 "💰 %.4f 元" = "💰 %.4f 元";
 
 /* No comment provided by engineer. */
-"💰 您今日已挣 %.4f %@" = "💰 您今日已挣 %.4f %@";
+"💰 您今日已挣 %.4f %@" = "💰 您今天已賺 %.4f %@";
 
 /* No comment provided by engineer. */
-"💰 数据错误" = "💰 数据错误";
+"💰 数据错误" = "💰 資料錯誤";
