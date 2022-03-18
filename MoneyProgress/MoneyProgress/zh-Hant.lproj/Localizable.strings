@@ -2,7 +2,22 @@
 "💰" = "💰";
 
 /* No comment provided by engineer. */
+"💰 %.0f 到手" = "💰 %.0f 到手";
+
+/* No comment provided by engineer. */
+"💰 %.4f 元" = "💰 %.4f %@";
+
+/* No comment provided by engineer. */
 "💰 您一个月到底工作几天？请检查自己的工作天数是否合理。" = "💰 您一個月到底工作幾天？";
+
+/* No comment provided by engineer. */
+"💰 您今日已挣 %.4f %@" = "💰 您今天已賺 %.4f %@";
+
+/* No comment provided by engineer. */
+"💰 暂未开工" = "💰 尚未開工";
+
+/* No comment provided by engineer. */
+"💰 数据错误" = "💰 資料錯誤";
 
 /* No comment provided by engineer. */
 "💰 赚钱为负，上什么班？请检查自己的工资是否为负。" = "💰 賺錢為負，上什麼班？";
@@ -91,14 +106,3 @@
 /* No comment provided by engineer. */
 "搜索" = "搜尋";
 
-/* No comment provided by engineer. */
-"💰 %.0f 到手" = "💰 %.0f 到手";
-
-/* No comment provided by engineer. */
-"💰 %.4f 元" = "💰 %.4f %@";
-
-/* No comment provided by engineer. */
-"💰 您今日已挣 %.4f %@" = "💰 您今天已賺 %.4f %@";
-
-/* No comment provided by engineer. */
-"💰 数据错误" = "💰 資料錯誤";
