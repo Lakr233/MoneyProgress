@@ -30,6 +30,8 @@
 		502AB50F27E00E7F003631C3 /* Menubar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menubar.swift; sourceTree = "<group>"; };
 		502AB51127E0112A003631C3 /* MenubarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenubarView.swift; sourceTree = "<group>"; };
 		5071DFBC27E0261E0015727B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		50B3662A27E41CEE004643E8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		50B3662B27E41DB9004643E8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		6CFBB78427E3845300A324A8 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		6CFBB78727E3845300A324A8 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		F4099B5527E323A000659675 /* ISO_4217_Currency _Codes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "ISO_4217_Currency _Codes.json"; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				6CFBB78427E3845300A324A8 /* zh-Hant */,
+				50B3662B27E41DB9004643E8 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -210,6 +213,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				6CFBB78727E3845300A324A8 /* zh-Hant */,
+				50B3662A27E41CEE004643E8 /* zh-Hans */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

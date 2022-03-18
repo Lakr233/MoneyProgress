@@ -91,3 +91,14 @@
 /* No comment provided by engineer. */
 "搜索" = "搜尋";
 
+/* No comment provided by engineer. */
+"💰 %.0f 到手" = "💰 %.0f 到手";
+
+/* No comment provided by engineer. */
+"💰 %.4f 元" = "💰 %.4f 元";
+
+/* No comment provided by engineer. */
+"💰 您今日已挣 %.4f %@" = "💰 您今日已挣 %.4f %@";
+
+/* No comment provided by engineer. */
+"💰 数据错误" = "💰 数据错误";
