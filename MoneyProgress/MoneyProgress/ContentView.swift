@@ -114,6 +114,7 @@ struct ContentView: View {
                 monthPaid = __monthPaid
                 isHaveNoonBreak = __isHaveNoonBreak
                 currencyUnit = __currencyUnit
+                dayWorkOfMonth = __dayWorkOfMonth
             }
         }
         .background(
@@ -140,19 +141,21 @@ struct ContentView: View {
                 Menubar.shared.reload()
             }
             .onChange(of: monthPaid) { newValue in
-                __monthPaid = newValue
                 if newValue < 0 {
                     self.isMoneyInvalid = true
                 } else {
+                    // write data if valid
+                    __monthPaid = newValue
                     self.isMoneyInvalid = false
                 }
                 Menubar.shared.reload()
             }
             .onChange(of: dayWorkOfMonth) { newValue in
-                __dayWorkOfMonth = newValue
                 if newValue <= 0 || newValue >= 32 {
                     self.isWorkDayInvalid = true
                 } else {
+                    // write data if valid
+                    __dayWorkOfMonth = newValue
                     self.isWorkDayInvalid = false
                 }
                 Menubar.shared.reload()
