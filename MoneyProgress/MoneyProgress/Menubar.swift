@@ -165,7 +165,7 @@ class Menubar: ObservableObject {
         var title = ""
 
         if percent <= 0 {
-            title = "💰 暂未开工"
+            title = "Not working yet".localized
         } else if percent >= 1 {
             title = String(format: NSLocalizedString("💰 %.0f available", comment: ""), money)
         } else {

@@ -47,7 +47,7 @@
 "Cancel" = "取消";
 
 /* No comment provided by engineer. */
-"So, let's say you work %lld days in a month:" = "這麼看來，假設一個月工作 %lld 天：";
+"So, let's say you work days in a month" = "這麼看來，假設一個月工作 %d 天";
 
 /* No comment provided by engineer. */
 "This piece is long enough" = "這條子夠長了吧";
@@ -77,10 +77,10 @@
 "Your effective working hours per day are %@ hours!" = "您一天有效工時 %@ 小時！";
 
 /* No comment provided by engineer. */
-"您一天能挣 %@ %@！" = "您一天能賺 %@ %@！";
+"You can earn how much a day!" = "您一天能賺 %@ %@！";
 
 /* No comment provided by engineer. */
-"您一秒钟能挣 %@ %@" = "您一秒能賺 %@ %@";
+"You can earn %@ %@ in one second" = "您一秒能賺 %@ %@";
 
 /* No comment provided by engineer. */
 "You have earned your full salary today!" = "您已賺到今天的全部薪水！";
@@ -106,3 +106,4 @@
 "touch fish together" = "一起摸鱼！";
 "touch all can touch" = "摸！都可以摸！";
 "Always touch fish" = "Always Day 1, Always Touch Fish!";
+"Not working yet" = "💰 暂未开工";

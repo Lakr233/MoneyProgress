@@ -77,10 +77,15 @@ struct ContentView: View {
             HStack {
                 VStack(alignment: .leading, spacing: 5) {
                     Spacer()
-                    Text("这么看来，假设一个月工作 \(dayWorkOfMonth) 天：")
-                    Text("您一天能挣 \(formattedCoinPerDay) \(currencyUnit)！")
-                    Text("您一天有效工时 \(workHours) 小时！")
-                    Text("您一秒钟能挣 \(formattedCoinPerSecond) \(currencyUnit)")
+                    let text1 = String(format: "So, let's say you work days in a month".localized, dayWorkOfMonth)
+                    Text(text1)
+                    // "You can earn how much a day!"
+                    let text2 = String(format: "You can earn how much a day!".localized, formattedCoinPerDay, currencyUnit)
+                    Text(text2)
+                    let text3 = String(format: "Your effective working hours per day are %@ hours!".localized, workHours)
+                    Text(text3)
+                    let text4 = String(format: "You can earn %@ %@ in one second".localized, formattedCoinPerSecond, currencyUnit)
+                    Text(text4)
                 }
                 .font(.system(.caption, design: .rounded))
                 .lineLimit(1)

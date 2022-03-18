@@ -59,7 +59,7 @@
 "Cancel" = "Cancel";
 
 /* No comment provided by engineer. */
-"So, let's say you work %lld days in a month:" = "So let's say you work %lld days in a month:";
+"So, let's say you work days in a month" = "So let's say you work %d days in a month";
 
 /* No comment provided by engineer. */
 "This piece is long enough" = "This piece is long enough";
@@ -89,7 +89,7 @@
 "Your effective working hours per day are %@ hours!" = "Your effective working hours per day are %@ hours!";
 
 /* No comment provided by engineer. */
-"You can earn %@ %@ a day!" = "You can earn %@ %@ a day!";
+"You can earn how much a day!" = "You can earn %@ %@ a day!";
 
 /* No comment provided by engineer. */
 "You can earn %@ %@ in one second" = "You can earn %@ %@ in one second";
@@ -106,3 +106,4 @@
 "touch fish together" = "Touch fish together!";
 "touch all can touch" = "Touch! all can touch!";
 "Always touch fish" = "Always Day 1, Always Touch Fish!";
+"Not working yet" = "💰 Not working yet";
