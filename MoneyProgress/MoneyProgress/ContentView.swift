@@ -77,10 +77,15 @@ struct ContentView: View {
             HStack {
                 VStack(alignment: .leading, spacing: 5) {
                     Spacer()
-                    Text("这么看来，假设一个月工作 \(dayWorkOfMonth) 天：")
-                    Text("您一天能挣 \(formattedCoinPerDay) \(currencyUnit)！")
-                    Text("您一天有效工时 \(workHours) 小时！")
-                    Text("您一秒钟能挣 \(formattedCoinPerSecond) \(currencyUnit)")
+                    let text1 = String(format: "So, let's say you work days in a month".localized, dayWorkOfMonth)
+                    Text(text1)
+                    // "You can earn how much a day!"
+                    let text2 = String(format: "You can earn how much a day!".localized, formattedCoinPerDay, currencyUnit)
+                    Text(text2)
+                    let text3 = String(format: "Your effective working hours per day are %@ hours!".localized, workHours)
+                    Text(text3)
+                    let text4 = String(format: "You can earn %@ %@ in one second".localized, formattedCoinPerSecond, currencyUnit)
+                    Text(text4)
                 }
                 .font(.system(.caption, design: .rounded))
                 .lineLimit(1)
@@ -89,12 +94,12 @@ struct ContentView: View {
                     Spacer()
                     HStack {
                         Toggle(isOn: $compactMode) {
-                            Text("紧凑模式")
+                            Text("compact mode")
                         }
                         Button {
                             fillInitialData()
                         } label: {
-                            Label("恢复默认（朝九晚六 CNY）", systemImage: "arrow.counterclockwise")
+                            Label("Restore Default (9 to 6 CNY)", systemImage: "arrow.counterclockwise")
                         }
                     }
                 }
@@ -245,17 +250,17 @@ struct ContentView: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 80, height: 80)
             VStack(spacing: 6) {
-                Text("钱条")
+                Text("money progress".localized)
                     .font(.system(.title2, design: .rounded))
                     .bold()
-                Text("挣钱的进度条，得是老板给我的欠条。")
+                Text("The progress bar for earning money must be an IOU from my boss.".localized)
                     .font(.system(.headline, design: .rounded))
             }
             progressBar
                 .frame(maxWidth: 400)
             HStack {
-                Text("月薪 ")
-                TextField("这条子够长了吧", text: Binding<String>(get: {
+                Text("monthly salary".localized)
+                TextField("This piece is long enough".localized, text: Binding<String>(get: {
                     String(monthPaid)
                 }, set: { str in
                     monthPaid = Int(str) ?? 0
@@ -271,14 +276,14 @@ struct ContentView: View {
                             currencyUnit = setUnit
                         }
                     })
-                Text("一个月工作 ")
-                TextField("几天", text: Binding<String>(get: {
+                Text("one month's work".localized)
+                TextField("days", text: Binding<String>(get: {
                     String(dayWorkOfMonth)
                 }, set: { str in
                     dayWorkOfMonth = Int(str) ?? 0
                 }))
                 .frame(width: 40)
-                Text("天")
+                Text("days".localized)
             }
             .font(.system(.subheadline, design: .rounded))
             .frame(maxWidth: 400)
@@ -295,21 +300,21 @@ struct ContentView: View {
                 }
             } label: {
                 if menubar.menubarRunning {
-                    Text("从状态栏撤下来！")
+                    Text("Remove from status bar!".localized)
                 } else {
-                    Text("立即挂到状态栏开始计价！")
+                    Text("Hang on the status bar to start pricing!".localized)
                 }
             }
             .alert(isPresented: $isShowAlert) {
                 if self.isMoneyInvalid {
                     return Alert(
-                        title: Text("就这？"),
-                        message: Text("💰 赚钱为负，上什么班？请检查自己的工资是否为负。")
+                        title: Text("This is it?".localized),
+                        message: Text("💰 Make negative money, what work do you work? Please check if your salary is negative.".localized)
                     )
                 } else {
                     return Alert(
-                        title: Text("就这？"),
-                        message: Text("💰 您一个月到底工作几天？请检查自己的工作天数是否合理。")
+                        title: Text("This is it?".localized),
+                        message: Text("💰 How many days do you work in a month? Please check if your working days are reasonable.".localized)
                     )
                 }
             }
@@ -416,22 +421,22 @@ struct ContentView: View {
             }
             .frame(height: 30)
             HStack {
-                DatePicker("上班于", selection: $workStartDate, displayedComponents: .hourAndMinute)
+                DatePicker("work at", selection: $workStartDate, displayedComponents: .hourAndMinute)
                 Spacer()
-                DatePicker("下班于", selection: $workEndDate, displayedComponents: .hourAndMinute)
+                DatePicker("off work on", selection: $workEndDate, displayedComponents: .hourAndMinute)
             }
             .font(.system(.caption, design: .rounded))
             HStack {
-                Toggle("是否有午休", isOn: $isHaveNoonBreak)
+                Toggle("Is there a lunch break", isOn: $isHaveNoonBreak)
                     .toggleStyle(.checkbox)
                 Spacer()
             }
 
             if isHaveNoonBreak {
                 HStack {
-                    DatePicker("午休开始于 ", selection: $noonBreakStartDate, displayedComponents: .hourAndMinute)
+                    DatePicker("Lunch break starts at ", selection: $noonBreakStartDate, displayedComponents: .hourAndMinute)
                     Spacer()
-                    DatePicker("午休结束于 ", selection: $noonBreakEndDate, displayedComponents: .hourAndMinute)
+                    DatePicker("Lunch break ends at", selection: $noonBreakEndDate, displayedComponents: .hourAndMinute)
                 }
                 .font(.system(.caption, design: .rounded))
             }
@@ -494,13 +499,13 @@ struct CoinTypePicker: View {
     var body: some View {
         VStack(spacing: 10) {
             HStack {
-                Text("选择货币种类")
+                Text("Select Currency Type")
                     .font(.system(.headline, design: .rounded))
                 Spacer()
             }
             Divider()
             HStack {
-                Text("搜索")
+                Text("search".localized)
                 TextField("", text: $search)
             }
             ScrollView {
@@ -534,7 +539,7 @@ struct CoinTypePicker: View {
                 Button {
                     presentationMode.wrappedValue.dismiss()
                 } label: {
-                    Text("取消")
+                    Text("Cancel".localized)
                 }
                 Spacer()
             }

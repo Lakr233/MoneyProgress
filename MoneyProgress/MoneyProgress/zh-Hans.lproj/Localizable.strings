@@ -1,104 +1,109 @@
 /* No comment provided by engineer. */
-"💰 %.0f 到手" = "💰 %.0f 到手";
+"💰 %.0f available" = "💰 %.0f 到手";
 
 /* No comment provided by engineer. */
-"💰 %.4f 元" = "💰 %.4f %@";
+"💰 %.2f yuan" = "💰 %.2f %@";
 
 /* No comment provided by engineer. */
-"💰 您今日已挣 %.4f %@" = "💰 您今日已挣 %.4f %@";
+"💰 You have earned %.2f %@ today" = "💰 您今日已挣 %.2f %@";
 
 /* No comment provided by engineer. */
-"💰 数据错误" = "💰 数据错误";
+"💰 data error" = "💰 数据错误";
 
 /* No comment provided by engineer. */
 "💰" = "💰";
 
 /* No comment provided by engineer. */
-"💰 您一个月到底工作几天？请检查自己的工作天数是否合理。" = "💰 您一个月到底工作几天？";
+"💰 How many days do you work in a month? Please check if your working days are reasonable." = "💰 您一个月到底工作几天？";
 
 /* No comment provided by engineer. */
-"💰 赚钱为负，上什么班？请检查自己的工资是否为负。" = "💰 挣负数的钱，上什么班？";
+"💰 Make negative money, what work do you work? Please check if your salary is negative." = "💰 挣负数的钱，上什么班？";
 
 /* No comment provided by engineer. */
-"一个月工作 " = "一个月工作 ";
+"one month's work" = "一个月工作 ";
 
 /* No comment provided by engineer. */
-"几天" = "几天";
+"days" = "几天";
 
 /* No comment provided by engineer. */
-"上班于" = "上班于 ";
+"work at" = "上班于 ";
 
 /* No comment provided by engineer. */
-"下班于" = "下班于 ";
+"off work on" = "下班于 ";
 
 /* No comment provided by engineer. */
-"今日进度" = "今日进度";
+"Today's Progress" = "今日进度";
 
 /* No comment provided by engineer. */
-"今日暂未开工！" = "今日暂未开工";
+"No work started today!" = "今日暂未开工";
 
 /* No comment provided by engineer. */
-"从状态栏撤下来！" = "从状态栏扯下来！";
+"Remove from status bar!" = "从状态栏扯下来！";
 
 /* No comment provided by engineer. */
-"午休开始于 " = "午休开始于 ";
+"Lunch break starts at " = "午休开始于 ";
 
 /* No comment provided by engineer. */
-"午休结束于 " = "午休结束于 ";
+"Lunch break ends at" = "午休结束于 ";
 
 /* No comment provided by engineer. */
-"天" = "天";
+"day" = "天";
 
 /* No comment provided by engineer. */
-"月薪 " = "月薪 ";
+"monthly salary" = "月薪 ";
 
 /* No comment provided by engineer. */
-"立即挂到状态栏开始计价！" = "立即挂到状态栏开始计价！";
+"Hang on the status bar to start pricing!" = "立即挂到状态栏开始计价！";
 
 /* No comment provided by engineer. */
-"取消" = "取消";
+"Cancel" = "取消";
 
 /* No comment provided by engineer. */
-"这么看来，假设一个月工作 %lld 天：" = "这么看来，假设一个月工作 %lld 天：";
+"So, let's say you work days in a month" = "这么看来，假设一个月工作 %d 天";
 
 /* No comment provided by engineer. */
-"这条子够长了吧" = "这条子够长了吧";
+"This piece is long enough" = "这条子够长了吧";
 
 /* No comment provided by engineer. */
-"恢复默认（朝九晚六 CNY）" = "恢复默认（朝九晚六 CNY）";
+"Restore Default (9 to 6 CNY)" = "恢复默认（朝九晚六 CNY）";
 
 /* No comment provided by engineer. */
-"挣钱的进度条，得是老板给我的欠条。" = "挣钱的进度条，得是老板给我的欠条。";
+"The progress bar for earning money must be an IOU from my boss." = "挣钱的进度条，得是老板给我的欠条。";
 
 /* No comment provided by engineer. */
-"是否有午休" = "是否有午休";
+"Is there a lunch break" = "是否有午休";
 
 /* No comment provided by engineer. */
-"紧凑模式" = "紧凑模式";
+"compact mode" = "紧凑模式";
 
 /* No comment provided by engineer. */
-"选择货币种类" = "选择货币种类";
+"Select Currency Type" = "选择货币种类";
 
 /* No comment provided by engineer. */
-"钱条" = "钱条";
+"money progress" = "钱条";
 
 /* No comment provided by engineer. */
-"预计今日一共挣钱 %lld %@" = "预计今日一共挣钱 %lld %@";
+"Expected to make a total of today's money" = "预计今日一共挣钱";
 
 /* No comment provided by engineer. */
-"您一天有效工时 %@ 小时！" = "您一天有效工时 %@ 小时！";
+"Your effective working hours per day are %@ hours!" = "您一天有效工时 %@ 小时！";
 
 /* No comment provided by engineer. */
-"您一天能挣 %@ %@！" = "您一天能挣 %@ %@！";
+"You can earn how much a day!" = "您一天能挣 %@ %@！";
 
 /* No comment provided by engineer. */
-"您一秒钟能挣 %@ %@" = "您一秒钟能挣 %@ %@";
+"You can earn %@ %@ in one second" = "您一秒钟能挣 %@ %@";
 
 /* No comment provided by engineer. */
-"您已挣到今天的全部薪酬！" = "您已挣到今天的全部薪酬！";
+"You have earned your full salary today!" = "您已挣到今天的全部薪酬！";
 
 /* No comment provided by engineer. */
-"就这？" = "就这？";
+"This is it?" = "就这？";
 
 /* No comment provided by engineer. */
-"搜索" = "搜索";
+"search" = "搜索";
+
+"touch fish together" = "一起摸鱼！";
+"touch all can touch" = "摸！都可以摸！";
+"Always touch fish" = "Always Day 1, Always Touch Fish!";
+"Not working yet" = "💰 暂未开工";
