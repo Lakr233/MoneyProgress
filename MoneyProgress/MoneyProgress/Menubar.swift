@@ -170,9 +170,9 @@ class Menubar: ObservableObject {
             title = String(format: NSLocalizedString("💰 %.0f available", comment: ""), money)
         } else {
             if compactMode {
-                title = String(format: NSLocalizedString("💰 %.4f yuan", comment: ""), money, currencyUnit)
+                title = String(format: NSLocalizedString("💰 %.2f yuan", comment: ""), money, currencyUnit)
             } else {
-                title = String(format: NSLocalizedString("💰 You have earned %.4f %@ today", comment: ""), money, currencyUnit)
+                title = String(format: NSLocalizedString("💰 You have earned %.2f %@ today", comment: ""), money, currencyUnit)
             }
         }
         statusItem.button?.title = title

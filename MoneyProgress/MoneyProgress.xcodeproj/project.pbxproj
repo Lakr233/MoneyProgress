@@ -18,6 +18,7 @@
 		F4099B5627E323A000659675 /* ISO_4217_Currency _Codes.json in Resources */ = {isa = PBXBuildFile; fileRef = F4099B5527E323A000659675 /* ISO_4217_Currency _Codes.json */; };
 		F4099B5927E32D2900659675 /* CurrencyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4099B5827E32D2900659675 /* CurrencyModel.swift */; };
 		F4099B5B27E32DB700659675 /* CurrencyModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4099B5A27E32DB700659675 /* CurrencyModelData.swift */; };
+		F4AFC77B27E50EE2009EA38C /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AFC77A27E50EE2009EA38C /* StringExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		F4099B5A27E32DB700659675 /* CurrencyModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyModelData.swift; sourceTree = "<group>"; };
 		F4AFC77727E4D3AA009EA38C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F4AFC77827E4D3AD009EA38C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F4AFC77A27E50EE2009EA38C /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 		5005055027DF837900B04FC9 /* MoneyProgress */ = {
 			isa = PBXGroup;
 			children = (
+				F4AFC77927E50ECB009EA38C /* Extension */,
 				F4099B5727E32D0500659675 /* Models */,
 				F4099B5427E3238C00659675 /* Resoucre */,
 				5071DFBC27E0261E0015727B /* Info.plist */,
@@ -111,6 +114,14 @@
 				F4099B5A27E32DB700659675 /* CurrencyModelData.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		F4AFC77927E50ECB009EA38C /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				F4AFC77A27E50EE2009EA38C /* StringExtension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -191,6 +202,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4099B5927E32D2900659675 /* CurrencyModel.swift in Sources */,
+				F4AFC77B27E50EE2009EA38C /* StringExtension.swift in Sources */,
 				5005055427DF837900B04FC9 /* ContentView.swift in Sources */,
 				F4099B5B27E32DB700659675 /* CurrencyModelData.swift in Sources */,
 				502AB51227E0112A003631C3 /* MenubarView.swift in Sources */,

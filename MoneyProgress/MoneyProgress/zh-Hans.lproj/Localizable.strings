@@ -2,10 +2,10 @@
 "💰 %.0f available" = "💰 %.0f 到手";
 
 /* No comment provided by engineer. */
-"💰 %.4f yuan" = "💰 %.4f %@";
+"💰 %.2f yuan" = "💰 %.2f %@";
 
 /* No comment provided by engineer. */
-"💰 You have earned %.4f %@ today" = "💰 您今日已挣 %.4f %@";
+"💰 You have earned %.2f %@ today" = "💰 您今日已挣 %.2f %@";
 
 /* No comment provided by engineer. */
 "💰 data error" = "💰 数据错误";
@@ -83,7 +83,7 @@
 "money progress" = "钱条";
 
 /* No comment provided by engineer. */
-"Expected to make a total of today's money %lld %@" = "预计今日一共挣钱 %lld %@";
+"Expected to make a total of today's money" = "预计今日一共挣钱";
 
 /* No comment provided by engineer. */
 "Your effective working hours per day are %@ hours!" = "您一天有效工时 %@ 小时！";
@@ -102,3 +102,7 @@
 
 /* No comment provided by engineer. */
 "search" = "搜索";
+
+"touch fish together" = "一起摸鱼！";
+"touch all can touch" = "摸！都可以摸！";
+"Always touch fish" = "Always Day 1, Always Touch Fish!";

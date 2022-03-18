@@ -11,9 +11,9 @@ struct MenubarView: View {
     @StateObject var menubar = Menubar.shared
 
     let myTitle = [
-        "一起摸鱼！",
-        "摸！都可以摸！",
-        "Always Day 1, Always Touch Fish!",
+        "touch fish together".localized,
+        "touch all can touch".localized,
+        "Always touch fish".localized,
     ]
 
     let currentTitle: String
@@ -39,17 +39,17 @@ struct MenubarView: View {
                 .font(.largeTitle)
             Group {
                 if menubar.todayPercent <= 0 {
-                    Text("No work started today!")
+                    Text("No work started today!".localized)
                 } else if menubar.todayPercent >= 0 {
                     Text(currentTitle)
                 } else {
-                    Text("You have earned your full salary today!")
+                    Text("You have earned your full salary today!".localized)
                 }
             }
             .font(.headline)
 
             HStack {
-                Text("Today's Progress")
+                Text("Today's Progress".localized)
                 Spacer()
                 Text(String(format: "%.4f", menubar.todayPercent * 100))
                 Text("%")
@@ -74,7 +74,7 @@ struct MenubarView: View {
             .frame(height: 15)
 
             HStack {
-                Text("预计今日一共挣钱 \(menubar.todayEarn) \(currencyUnit)")
+                Text("\("Expected to make a total of today's money".localized) \(menubar.todayEarn) \(currencyUnit)")
                 Spacer()
             }
             .font(.system(.caption, design: .monospaced))

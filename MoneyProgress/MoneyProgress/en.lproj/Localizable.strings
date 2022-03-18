@@ -2,10 +2,10 @@
 "💰 %.0f available" = "💰 %.0f available";
 
 /* No comment provided by engineer. */
-"💰 %.4f yuan" = "💰 %.4f %@";
+"💰 %.2f yuan" = "💰 %.2f %@";
 
 /* No comment provided by engineer. */
-"💰 You have earned %.4f %@ today" = "💰 You have earned %.4f %@ today";
+"💰 You have earned %.2f %@ today" = "💰 You have earned %.2f %@ today";
 
 /* No comment provided by engineer. */
 "💰 data error" = "💰 data error";
@@ -20,16 +20,16 @@
 "💰 Make negative money, what work do you work? Please check if your salary is negative." = "💰 Earn negative money, what work do you work?";
 
 /* No comment provided by engineer. */
-"one month's work" = "one month's work";
+"one month's work" = "One month's work";
 
 /* No comment provided by engineer. */
-"days" = "days";
+"days" = "Day(s)";
 
 /* No comment provided by engineer. */
-"work at" = "work at";
+"work at" = "Work starts at";
 
 /* No comment provided by engineer. */
-"off work on" = "off work on ";
+"off work on" = "Work ends at";
 
 /* No comment provided by engineer. */
 "Today's Progress" = "Today's Progress";
@@ -50,7 +50,7 @@
 "day" = "day";
 
 /* No comment provided by engineer. */
-"monthly salary" = "monthly salary";
+"monthly salary" = "Monthly salary";
 
 /* No comment provided by engineer. */
 "Hang on the status bar to start pricing!" = "Hang on the status bar to start pricing!";
@@ -80,10 +80,10 @@
 "Select Currency Type" = "Select Currency Type";
 
 /* No comment provided by engineer. */
-"money progress" = "money progress";
+"money progress" = "Money Progress";
 
 /* No comment provided by engineer. */
-"Expected to make a total of today's money %lld %@" = "Estimated to make a total of today's money %lld %@";
+"Expected to make a total of today's money" = "Estimated to make a total of today's money";
 
 /* No comment provided by engineer. */
 "Your effective working hours per day are %@ hours!" = "Your effective working hours per day are %@ hours!";
@@ -102,3 +102,7 @@
 
 /* No comment provided by engineer. */
 "search" = "search";
+
+"touch fish together" = "Touch fish together!";
+"touch all can touch" = "Touch! all can touch!";
+"Always touch fish" = "Always Day 1, Always Touch Fish!";

@@ -245,17 +245,17 @@ struct ContentView: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 80, height: 80)
             VStack(spacing: 6) {
-                Text("money progress")
+                Text("money progress".localized)
                     .font(.system(.title2, design: .rounded))
                     .bold()
-                Text("The progress bar for earning money must be an IOU from my boss.")
+                Text("The progress bar for earning money must be an IOU from my boss.".localized)
                     .font(.system(.headline, design: .rounded))
             }
             progressBar
                 .frame(maxWidth: 400)
             HStack {
-                Text("monthly salary")
-                TextField("This piece is long enough", text: Binding<String>(get: {
+                Text("monthly salary".localized)
+                TextField("This piece is long enough".localized, text: Binding<String>(get: {
                     String(monthPaid)
                 }, set: { str in
                     monthPaid = Int(str) ?? 0
@@ -271,14 +271,14 @@ struct ContentView: View {
                             currencyUnit = setUnit
                         }
                     })
-                Text("one month's work")
+                Text("one month's work".localized)
                 TextField("days", text: Binding<String>(get: {
                     String(dayWorkOfMonth)
                 }, set: { str in
                     dayWorkOfMonth = Int(str) ?? 0
                 }))
                 .frame(width: 40)
-                Text("天")
+                Text("days".localized)
             }
             .font(.system(.subheadline, design: .rounded))
             .frame(maxWidth: 400)
@@ -295,21 +295,21 @@ struct ContentView: View {
                 }
             } label: {
                 if menubar.menubarRunning {
-                    Text("Remove from status bar!")
+                    Text("Remove from status bar!".localized)
                 } else {
-                    Text("Hang on the status bar to start pricing!")
+                    Text("Hang on the status bar to start pricing!".localized)
                 }
             }
             .alert(isPresented: $isShowAlert) {
                 if self.isMoneyInvalid {
                     return Alert(
-                        title: Text("This is it?"),
-                        message: Text("💰 Make negative money, what work do you work? Please check if your salary is negative.")
+                        title: Text("This is it?".localized),
+                        message: Text("💰 Make negative money, what work do you work? Please check if your salary is negative.".localized)
                     )
                 } else {
                     return Alert(
-                        title: Text("This is it?"),
-                        message: Text("💰 How many days do you work in a month? Please check if your working days are reasonable.")
+                        title: Text("This is it?".localized),
+                        message: Text("💰 How many days do you work in a month? Please check if your working days are reasonable.".localized)
                     )
                 }
             }
@@ -500,7 +500,7 @@ struct CoinTypePicker: View {
             }
             Divider()
             HStack {
-                Text("search")
+                Text("search".localized)
                 TextField("", text: $search)
             }
             ScrollView {
@@ -534,7 +534,7 @@ struct CoinTypePicker: View {
                 Button {
                     presentationMode.wrappedValue.dismiss()
                 } label: {
-                    Text("Cancel")
+                    Text("Cancel".localized)
                 }
                 Spacer()
             }
