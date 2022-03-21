@@ -9,6 +9,12 @@ import AppKit
 import Colorful
 import SwiftUI
 
+enum AlertType {
+    case moneyCountInvalid
+    case workDayInvalid
+    case timeInvalid
+}
+
 struct ContentView: View {
     // store timestamp at 1970.1.1
     // we are using the time components only
@@ -61,6 +67,8 @@ struct ContentView: View {
     @State private var currencyUnit = "CNY"
 
     @State private var openCoinTypePicker = false
+    
+    @State private var alertType: AlertType = .moneyCountInvalid
 
     var body: some View {
         ZStack {
@@ -288,8 +296,7 @@ struct ContentView: View {
             .font(.system(.subheadline, design: .rounded))
             .frame(maxWidth: 400)
             Button {
-                if isMoneyInvalid || isWorkDayInvalid {
-                    isShowAlert = true
+                if !checkInputIfValid() {
                     return
                 }
 
@@ -306,20 +313,75 @@ struct ContentView: View {
                 }
             }
             .alert(isPresented: $isShowAlert) {
-                if self.isMoneyInvalid {
+                switch alertType {
+                case .moneyCountInvalid:
                     return Alert(
                         title: Text("This is it?".localized),
                         message: Text("💰 Make negative money, what work do you work? Please check if your salary is negative.".localized)
                     )
-                } else {
+                case .workDayInvalid:
                     return Alert(
                         title: Text("This is it?".localized),
                         message: Text("💰 How many days do you work in a month? Please check if your working days are reasonable.".localized)
                     )
+                case .timeInvalid:
+                    return Alert(
+                        title: Text("invalid_time_range_tip".localized),
+                        message: Text("time_range_tip".localized)
+                    )
                 }
+                
             }
             Spacer()
                 .frame(height: 50)
+        }
+    }
+    
+    private func checkInputIfValid() -> Bool {
+        var inputValid: Bool = true
+        if isMoneyInvalid {
+            inputValid = false
+            alertType = .moneyCountInvalid
+        }
+        
+        if isWorkDayInvalid {
+            inputValid = false
+            alertType = .workDayInvalid
+        }
+        
+        if !timeIsValid() {
+            inputValid = false
+            alertType = .timeInvalid
+        }
+        isShowAlert = inputValid ? false : true
+        return inputValid
+    }
+    
+    private func timeIsValid() -> Bool {
+        if isHaveNoonBreak {
+            /*
+             if has Noon Break
+             workStartDate < noonBreakStartDate
+             noonBreakStartDate < noonBreakEndDate
+             noonBreakEndDate < workEndDate
+             */
+            if workStartDate.timeIntervalSince(noonBreakStartDate) < 0 &&
+                noonBreakStartDate.timeIntervalSince(noonBreakEndDate) < 0 &&
+                noonBreakEndDate.timeIntervalSince(workEndDate) < 0 {
+                return true
+            } else {
+                return false
+            }
+        } else {
+            /*
+             no noon Break
+             workStartDate < workEndDate
+             */
+            if workStartDate.timeIntervalSince(workEndDate) < 0 {
+                return true
+            } else {
+                return false
+            }
         }
     }
 

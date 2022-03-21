@@ -107,3 +107,5 @@
 "touch all can touch" = "Touch! all can touch!";
 "Always touch fish" = "Always Day 1, Always Touch Fish!";
 "Not working yet" = "💰 Not working yet";
+"invalid_time_range_tip" = "Invalid time range";
+"time_range_tip" = "Please set up correct time range";
