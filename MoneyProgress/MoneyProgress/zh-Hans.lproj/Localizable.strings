@@ -107,3 +107,5 @@
 "touch all can touch" = "摸！都可以摸！";
 "Always touch fish" = "Always Day 1, Always Touch Fish!";
 "Not working yet" = "💰 暂未开工";
+"invalid_time_range_tip" = "时间范围无效";
+"time_range_tip" = "请设置正确的时间范围";
