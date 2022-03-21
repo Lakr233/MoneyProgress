@@ -134,17 +134,56 @@ class Menubar: ObservableObject {
             return
         }
 
-        var passed = 1.0
-        // check if after noon break start
-        let afterNoonBreak = now.timeIntervalSince(noonBreakStartDate) > 0
-        if isHaveNoonBreak, afterNoonBreak {
-            // interval = (now - noonBreakEndDate) + (noonBreakStartDate - workStartDate)
-            passed = now.timeIntervalSince(noonBreakEndDate) + noonBreakStartDate.timeIntervalSince(workStartDate)
+        var passedTimeInterval = 1.0
+        
+        if isHaveNoonBreak {
+            /*
+             如果有午休 四个时间点 划分为5个时间区域点
+             if now <= workStartDate So passed < 0
+             if workStartDate < now && now < noonBreakStartDate So passed = now - workStartDate
+             if noonBreakStartDate <= now && now <= noonBreakEndDate So passed = noonBreakStartDate - workStartDate
+             if noonBreakEndDate < now && now < workEndDate So passed = (now - noonBreakEndDate) + (noonBreakStartDate - workStartDate)
+             if workEndDate <= now So passed = now - workStartDate
+             */
+            if now.timeIntervalSince(workStartDate) <= 0 {
+                passedTimeInterval = -1
+            }
+            else if now.timeIntervalSince(workStartDate) > 0 &&
+                        now.timeIntervalSince(noonBreakStartDate) < 0 {
+                passedTimeInterval = now.timeIntervalSince(workStartDate)
+            }
+            else if now.timeIntervalSince(noonBreakStartDate) >= 0 &&
+                        now.timeIntervalSince(noonBreakEndDate) <= 0 {
+                passedTimeInterval = noonBreakStartDate.timeIntervalSince(workStartDate)
+            }
+            else if now.timeIntervalSince(noonBreakEndDate) > 0 &&
+                        now.timeIntervalSince(workEndDate) < 0 {
+                passedTimeInterval = now.timeIntervalSince(noonBreakEndDate) + noonBreakStartDate.timeIntervalSince(workStartDate)
+            }
+            else {
+                passedTimeInterval = now.timeIntervalSince(workStartDate)
+            }
         } else {
-            // interval = workEndDate - workStartDate
-            passed = now.timeIntervalSince(workStartDate)
+            /*
+             如果没有午休 两个时间点 划分为3个时间区域点
+             if now < workStartDate So passed < 0
+             if workStartDate < now && now < workEndDate So passed = now - workStartDate
+             if workEndDate <= now So passed = now - workStartDate
+             */
+            if now.timeIntervalSince(workStartDate) <= 0 {
+                passedTimeInterval = -1
+            }
+            else if now.timeIntervalSince(workStartDate) > 0 &&
+                        now.timeIntervalSince(workEndDate) < 0 {
+                passedTimeInterval = now.timeIntervalSince(workStartDate)
+            }
+            else {
+                passedTimeInterval = now.timeIntervalSince(workStartDate)
+            }
+            
         }
-        var percent = passed / totalWorkTimeInterval
+        
+        var percent = passedTimeInterval / totalWorkTimeInterval
         if percent < 0 { percent = 0 }
         if percent > 1 { percent = 1 }
         let todayMake = Double(monthPaid / dayWorkOfMonth)
@@ -154,7 +193,7 @@ class Menubar: ObservableObject {
             debugPrint("===========")
             debugPrint("today start at: ", todayStart.formatted())
             debugPrint("current timestamp: ", now.formatted())
-            debugPrint("seconds started: ", TimeInterval(passed).formatted())
+            debugPrint("seconds started: ", TimeInterval(passedTimeInterval).formatted())
             debugPrint("today will earn: ", todayMake)
             debugPrint("percent of today: ", percent)
             debugPrint("current made: ", money)
