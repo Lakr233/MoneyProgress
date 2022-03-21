@@ -97,7 +97,7 @@ class Menubar: ObservableObject {
         guard let statusItem = statusItem else {
             return
         }
-        
+
         let workStartDate = Date(timeIntervalSince1970: workStart)
         let calendar = Calendar.current
         let nowDate = Date()
@@ -115,8 +115,8 @@ class Menubar: ObservableObject {
             return
         }
 
-        let passedTimeInterval: TimeInterval = self.obtainPassedTimeInterval()
-        let totalWorkTimeInterval: TimeInterval = self.obtainTotalWorkTimeInterval()
+        let passedTimeInterval: TimeInterval = obtainPassedTimeInterval()
+        let totalWorkTimeInterval: TimeInterval = obtainTotalWorkTimeInterval()
         var percent = passedTimeInterval / totalWorkTimeInterval
         if percent < 0 { percent = 0 }
         if percent > 1 { percent = 1 }
@@ -150,8 +150,8 @@ class Menubar: ObservableObject {
         }
         statusItem.button?.title = title
     }
-    
-    private func obtainPassedTimeInterval () -> TimeInterval {
+
+    private func obtainPassedTimeInterval() -> TimeInterval {
         /*
          如果有午休 四个时间点 划分为5个时间区域点
          if now <= workStartDate So passed < 0
@@ -160,7 +160,7 @@ class Menubar: ObservableObject {
          if noonBreakEndDate < now && now < workEndDate So passed = (now - noonBreakEndDate) + (noonBreakStartDate - workStartDate)
          if workEndDate <= now So passed = now - workStartDate
          */
-        
+
         /*
          如果没有午休 两个时间点 划分为3个时间区域点
          if now < workStartDate So passed < 0
@@ -172,45 +172,39 @@ class Menubar: ObservableObject {
         let noonBreakStartDate = Date(timeIntervalSince1970: noonBreakStartTimeStamp)
         let noonBreakEndDate = Date(timeIntervalSince1970: noonBreakEndTimeStamp)
         let nowDate = Date()
-        
+
         var passedTimeInterval: TimeInterval = 0.0
         let timeIntervalFromWorkStartDate: TimeInterval = nowDate.timeIntervalSince(workStartDate)
         let beforeWorkStartDateFlag: Bool = timeIntervalFromWorkStartDate <= 0
         let betweenWorkStartDateAndNoonBreakStartDate: Bool = timeIntervalFromWorkStartDate > 0 && nowDate.timeIntervalSince(noonBreakStartDate) < 0
         let betweenNoonBreakStartDateAndNoonBreakEndDate: Bool = nowDate.timeIntervalSince(noonBreakStartDate) >= 0 && nowDate.timeIntervalSince(noonBreakEndDate) <= 0
         let betweenNoonBreakEndDateAndWorkEndDate: Bool = nowDate.timeIntervalSince(noonBreakEndDate) > 0 && nowDate.timeIntervalSince(workEndDate) < 0
-        let betweenWorkStartDateAndWorkEndDate: Bool = timeIntervalFromWorkStartDate > 0  && nowDate.timeIntervalSince(workEndDate) < 0
-        
+        let betweenWorkStartDateAndWorkEndDate: Bool = timeIntervalFromWorkStartDate > 0 && nowDate.timeIntervalSince(workEndDate) < 0
+
         if isHaveNoonBreak {
             if beforeWorkStartDateFlag {
                 passedTimeInterval = 0.0
-            }
-            else if betweenWorkStartDateAndNoonBreakStartDate {
+            } else if betweenWorkStartDateAndNoonBreakStartDate {
                 passedTimeInterval = timeIntervalFromWorkStartDate
-            }
-            else if betweenNoonBreakStartDateAndNoonBreakEndDate {
+            } else if betweenNoonBreakStartDateAndNoonBreakEndDate {
                 passedTimeInterval = noonBreakStartDate.timeIntervalSince(workStartDate)
-            }
-            else if betweenNoonBreakEndDateAndWorkEndDate {
+            } else if betweenNoonBreakEndDateAndWorkEndDate {
                 passedTimeInterval = nowDate.timeIntervalSince(noonBreakEndDate) + noonBreakStartDate.timeIntervalSince(workStartDate)
-            }
-            else {
+            } else {
                 passedTimeInterval = timeIntervalFromWorkStartDate
             }
         } else {
             if beforeWorkStartDateFlag {
                 passedTimeInterval = 0.0
-            }
-            else if betweenWorkStartDateAndWorkEndDate {
+            } else if betweenWorkStartDateAndWorkEndDate {
                 passedTimeInterval = timeIntervalFromWorkStartDate
-            }
-            else {
+            } else {
                 passedTimeInterval = timeIntervalFromWorkStartDate
             }
         }
         return passedTimeInterval
     }
-    
+
     private func obtainTotalWorkTimeInterval() -> TimeInterval {
         let workStartDate = Date(timeIntervalSince1970: workStart)
         let workEndDate = Date(timeIntervalSince1970: workEnd)
