@@ -67,7 +67,7 @@ struct ContentView: View {
     @State private var currencyUnit = "CNY"
 
     @State private var openCoinTypePicker = false
-    
+
     @State private var alertType: AlertType = .moneyCountInvalid
 
     var body: some View {
@@ -330,25 +330,24 @@ struct ContentView: View {
                         message: Text("time_range_tip".localized)
                     )
                 }
-                
             }
             Spacer()
                 .frame(height: 50)
         }
     }
-    
+
     private func checkInputIfValid() -> Bool {
-        var inputValid: Bool = true
+        var inputValid = true
         if isMoneyInvalid {
             inputValid = false
             alertType = .moneyCountInvalid
         }
-        
+
         if isWorkDayInvalid {
             inputValid = false
             alertType = .workDayInvalid
         }
-        
+
         if !timeIsValid() {
             inputValid = false
             alertType = .timeInvalid
@@ -356,7 +355,7 @@ struct ContentView: View {
         isShowAlert = inputValid ? false : true
         return inputValid
     }
-    
+
     private func timeIsValid() -> Bool {
         if isHaveNoonBreak {
             /*
@@ -365,9 +364,10 @@ struct ContentView: View {
              noonBreakStartDate < noonBreakEndDate
              noonBreakEndDate < workEndDate
              */
-            if workStartDate.timeIntervalSince(noonBreakStartDate) < 0 &&
-                noonBreakStartDate.timeIntervalSince(noonBreakEndDate) < 0 &&
-                noonBreakEndDate.timeIntervalSince(workEndDate) < 0 {
+            if workStartDate.timeIntervalSince(noonBreakStartDate) < 0,
+               noonBreakStartDate.timeIntervalSince(noonBreakEndDate) < 0,
+               noonBreakEndDate.timeIntervalSince(workEndDate) < 0
+            {
                 return true
             } else {
                 return false
