@@ -118,12 +118,12 @@ struct ContentView: View {
             if __workStart == 0 || __workEnd == 0 {
                 fillInitialData()
             } else {
-                workStartTimeStamp = __workStart
-                workEndTimeStamp = __workEnd
-                workStartDate = Date(timeIntervalSince1970: __workStart)
-                workEndDate = Date(timeIntervalSince1970: __workEnd)
-                noonBreakStartDate = Date(timeIntervalSince1970: __noonBreakStartTimeStamp)
-                noonBreakEndDate = Date(timeIntervalSince1970: __noonBreakEndTimeStamp)
+                workStartDate = Date(timeIntervalSince1970: __workStart).movedToTodayAndKeepHMS
+                workEndDate = Date(timeIntervalSince1970: __workEnd).movedToTodayAndKeepHMS
+                workStartTimeStamp = workStartDate.timeIntervalSince1970
+                workEndTimeStamp = workEndDate.timeIntervalSince1970
+                noonBreakStartDate = Date(timeIntervalSince1970: __noonBreakStartTimeStamp).movedToTodayAndKeepHMS
+                noonBreakEndDate = Date(timeIntervalSince1970: __noonBreakEndTimeStamp).movedToTodayAndKeepHMS
                 monthPaid = __monthPaid
                 isHaveNoonBreak = __isHaveNoonBreak
                 currencyUnit = __currencyUnit
@@ -537,6 +537,25 @@ extension Date {
         let calendar = Calendar.current
         return Double(calendar.component(.hour, from: self) * 60
             + calendar.component(.minute, from: self))
+    }
+
+    var movedToTodayAndKeepHMS: Date {
+        let calendar = Calendar.current
+        let nowDate = Date()
+        let newDate = DateComponents(
+            calendar: calendar,
+            year: calendar.component(.year, from: nowDate),
+            month: calendar.component(.month, from: nowDate),
+            day: calendar.component(.day, from: nowDate),
+            hour: calendar.component(.hour, from: self),
+            minute: calendar.component(.minute, from: self),
+            second: 0
+        ).date
+        #if DEBUG
+            return newDate!
+        #else
+            return newDate ?? .init()
+        #endif
     }
 }
 
