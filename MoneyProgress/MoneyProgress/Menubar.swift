@@ -28,6 +28,7 @@ class Menubar: ObservableObject {
 
     @AppStorage("wiki.qaq.noonBreakStartTimeStamp")
     var noonBreakStartTimeStamp: Double = 0
+
     @AppStorage("wiki.qaq.noonBreakEndTimeStamp")
     var noonBreakEndTimeStamp: Double = 0
 

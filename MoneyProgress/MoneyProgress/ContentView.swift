@@ -191,36 +191,7 @@ struct ContentView: View {
             }
     }
 
-    func fillInitialData() {
-        let date = Date()
-        workStartTimeStamp = getTodayDate(hour: 9)?.timeIntervalSince1970 ?? 0
-        workStartDate = getTodayDate(hour: 9) ?? date
-        noonBreakStartDate = getTodayDate(hour: 12) ?? date
-        noonBreakEndDate = getTodayDate(hour: 14) ?? date
-        workEndTimeStamp = getTodayDate(hour: 18)?.timeIntervalSince1970 ?? 0
-        workEndDate = getTodayDate(hour: 18) ?? date
-        isHaveNoonBreak = false
-        dayWorkOfMonth = 20
-        currencyUnit = "CNY"
-    }
-
-    func getTodayDate(hour: Int, minute: Int = 0, second: Int = 0) -> Date? {
-        let date = Date()
-        let calendar = Calendar.current
-
-        let dateComponents = DateComponents(
-            calendar: Calendar.current,
-            year: calendar.component(.year, from: date),
-            month: calendar.component(.month, from: date),
-            day: calendar.component(.day, from: date),
-            hour: hour,
-            minute: minute,
-            second: second
-        )
-        return dateComponents.date
-    }
-
-    var rmbPerSecond: Double {
+    var coinPerSecond: Double {
         var timeInterval: TimeInterval = 1
         if isHaveNoonBreak {
             // interval = (workEndDate - noonBreakEndDate) + (noonBreakStartDate - workStartDate)
@@ -247,15 +218,15 @@ struct ContentView: View {
     }
 
     var formattedCoinPerSecond: String {
-        String(format: "%.4f", rmbPerSecond)
+        String(format: "%.4f", coinPerSecond)
     }
 
-    var rmbPerDay: Double {
+    var coinPerDay: Double {
         Double(monthPaid) / Double(dayWorkOfMonth)
     }
 
     var formattedCoinPerDay: String {
-        String(format: "%.2f", rmbPerDay)
+        String(format: "%.2f", coinPerDay)
     }
 
     var appIntro: some View {
@@ -341,63 +312,6 @@ struct ContentView: View {
             }
             Spacer()
                 .frame(height: 50)
-        }
-    }
-
-    private func checkInputIfValid() -> Bool {
-        var inputValid = true
-        if isMoneyInvalid {
-            inputValid = false
-            alertType = .moneyCountInvalid
-        }
-
-        if isWorkDayInvalid {
-            inputValid = false
-            alertType = .workDayInvalid
-        }
-
-        if !timeIsValid() {
-            inputValid = false
-            alertType = .timeInvalid
-        }
-        isShowAlert = inputValid ? false : true
-        return inputValid
-    }
-
-    private func timeIsValid() -> Bool {
-        if isHaveNoonBreak {
-            /*
-             if has Noon Break
-             workStartDate < noonBreakStartDate
-             noonBreakStartDate < noonBreakEndDate
-             noonBreakEndDate < workEndDate
-             */
-            if workStartDate.timeIntervalSince(noonBreakStartDate) < 0,
-               noonBreakStartDate.timeIntervalSince(noonBreakEndDate) < 0,
-               noonBreakEndDate.timeIntervalSince(workEndDate) < 0
-            {
-                return true
-            } else {
-                return false
-            }
-        } else {
-            /*
-             no noon Break
-             workStartDate < workEndDate
-             */
-            if workStartDate.timeIntervalSince(workEndDate) < 0 {
-                return true
-            } else {
-                return false
-            }
-        }
-    }
-
-    func twoDigit(_ i: Int) -> String {
-        if i < 10 {
-            return "0\(i)"
-        } else {
-            return String(i)
         }
     }
 
@@ -533,5 +447,91 @@ struct ContentView: View {
         fmt.dateStyle = .none // set as desired
         fmt.timeStyle = .medium // set as desired
         return fmt.string(from: Date(timeIntervalSince1970: from))
+    }
+
+    func fillInitialData() {
+        let date = Date()
+        workStartTimeStamp = getTodayDate(hour: 9)?.timeIntervalSince1970 ?? 0
+        workStartDate = getTodayDate(hour: 9) ?? date
+        noonBreakStartDate = getTodayDate(hour: 12) ?? date
+        noonBreakEndDate = getTodayDate(hour: 14) ?? date
+        workEndTimeStamp = getTodayDate(hour: 18)?.timeIntervalSince1970 ?? 0
+        workEndDate = getTodayDate(hour: 18) ?? date
+        isHaveNoonBreak = false
+        dayWorkOfMonth = 20
+        currencyUnit = "CNY"
+    }
+
+    func twoDigit(_ i: Int) -> String {
+        if i < 10 {
+            return "0\(i)"
+        } else {
+            return String(i)
+        }
+    }
+
+    func getTodayDate(hour: Int, minute: Int = 0, second: Int = 0) -> Date? {
+        let date = Date()
+        let calendar = Calendar.current
+
+        let dateComponents = DateComponents(
+            calendar: Calendar.current,
+            year: calendar.component(.year, from: date),
+            month: calendar.component(.month, from: date),
+            day: calendar.component(.day, from: date),
+            hour: hour,
+            minute: minute,
+            second: second
+        )
+        return dateComponents.date
+    }
+
+    func checkInputIfValid() -> Bool {
+        var inputValid = true
+        if isMoneyInvalid {
+            inputValid = false
+            alertType = .moneyCountInvalid
+        }
+
+        if isWorkDayInvalid {
+            inputValid = false
+            alertType = .workDayInvalid
+        }
+
+        if !timeIsValid() {
+            inputValid = false
+            alertType = .timeInvalid
+        }
+        isShowAlert = inputValid ? false : true
+        return inputValid
+    }
+
+    func timeIsValid() -> Bool {
+        if isHaveNoonBreak {
+            /*
+             if has Noon Break
+             workStartDate < noonBreakStartDate
+             noonBreakStartDate < noonBreakEndDate
+             noonBreakEndDate < workEndDate
+             */
+            if workStartDate.timeIntervalSince(noonBreakStartDate) < 0,
+               noonBreakStartDate.timeIntervalSince(noonBreakEndDate) < 0,
+               noonBreakEndDate.timeIntervalSince(workEndDate) < 0
+            {
+                return true
+            } else {
+                return false
+            }
+        } else {
+            /*
+             no noon Break
+             workStartDate < workEndDate
+             */
+            if workStartDate.timeIntervalSince(workEndDate) < 0 {
+                return true
+            } else {
+                return false
+            }
+        }
     }
 }
