@@ -138,19 +138,27 @@ struct ContentView: View {
     var dataListener: some View {
         Group {}
             .onChange(of: workStartDate) { newValue in
-                __workStart = newValue.timeIntervalSince1970
+                __workStart = newValue
+                    .movedToTodayAndKeepHMS
+                    .timeIntervalSince1970
                 Menubar.shared.reload()
             }
             .onChange(of: workEndDate) { newValue in
-                __workEnd = newValue.timeIntervalSince1970
+                __workEnd = newValue
+                    .movedToTodayAndKeepHMS
+                    .timeIntervalSince1970
                 Menubar.shared.reload()
             }
             .onChange(of: noonBreakStartDate) { newValue in
-                __noonBreakStartTimeStamp = newValue.timeIntervalSince1970
+                __noonBreakStartTimeStamp = newValue
+                    .movedToTodayAndKeepHMS
+                    .timeIntervalSince1970
                 Menubar.shared.reload()
             }
             .onChange(of: noonBreakEndDate) { newValue in
-                __noonBreakEndTimeStamp = newValue.timeIntervalSince1970
+                __noonBreakEndTimeStamp = newValue
+                    .movedToTodayAndKeepHMS
+                    .timeIntervalSince1970
                 Menubar.shared.reload()
             }
             .onChange(of: monthPaid) { newValue in
@@ -525,107 +533,5 @@ struct ContentView: View {
         fmt.dateStyle = .none // set as desired
         fmt.timeStyle = .medium // set as desired
         return fmt.string(from: Date(timeIntervalSince1970: from))
-    }
-}
-
-extension Date {
-    var dayAfter: Date { Calendar.current.date(byAdding: .day, value: 1, to: noon)! }
-    var noon: Date { Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: self)! }
-    var startOfDay: Date { Calendar.current.startOfDay(for: self) }
-    var endOfDay: Date { Calendar.current.date(byAdding: .init(second: -1), to: dayAfter.startOfDay)! }
-    var minSinceMidnight: Double {
-        let calendar = Calendar.current
-        return Double(calendar.component(.hour, from: self) * 60
-            + calendar.component(.minute, from: self))
-    }
-
-    var movedToTodayAndKeepHMS: Date {
-        let calendar = Calendar.current
-        let nowDate = Date()
-        let newDate = DateComponents(
-            calendar: calendar,
-            year: calendar.component(.year, from: nowDate),
-            month: calendar.component(.month, from: nowDate),
-            day: calendar.component(.day, from: nowDate),
-            hour: calendar.component(.hour, from: self),
-            minute: calendar.component(.minute, from: self),
-            second: 0
-        ).date
-        #if DEBUG
-            return newDate!
-        #else
-            return newDate ?? .init()
-        #endif
-    }
-}
-
-struct MainPreview: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
-
-struct CoinTypePicker: View {
-    @Environment(\.presentationMode) var presentationMode
-
-    let onLoad: () -> (String)
-    let onComplete: (String) -> Void
-
-    var gridItem = [GridItem(.adaptive(minimum: 45, maximum: 75))]
-
-    @State var unit: String = ""
-
-    @State var search: String = ""
-
-    var body: some View {
-        VStack(spacing: 10) {
-            HStack {
-                Text("Select Currency Type")
-                    .font(.system(.headline, design: .rounded))
-                Spacer()
-            }
-            Divider()
-            HStack {
-                Text("search".localized)
-                TextField("", text: $search)
-            }
-            ScrollView {
-                LazyVGrid(columns: gridItem, alignment: .center) {
-                    ForEach(currencyModels, id: \.self) { item in
-                        if search.isEmpty || item.AlphabeticCode.lowercased().contains(search.lowercased()) {
-                            Text(item.AlphabeticCode)
-                                .underline()
-                                .font(.system(.subheadline, design: .rounded))
-                                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                .padding(4)
-                                .background(Color.accentColor.opacity(0.1))
-                                .cornerRadius(4)
-                                .onTapGesture {
-                                    onComplete(item.AlphabeticCode)
-                                    presentationMode.wrappedValue.dismiss()
-                                }
-                                .onHover { h in
-                                    if h {
-                                        NSCursor.pointingHand.push()
-                                    } else {
-                                        NSCursor.pop()
-                                    }
-                                }
-                        }
-                    }
-                }
-            }
-            Divider()
-            HStack {
-                Button {
-                    presentationMode.wrappedValue.dismiss()
-                } label: {
-                    Text("Cancel".localized)
-                }
-                Spacer()
-            }
-        }
-        .padding()
-        .frame(width: 600, height: 400, alignment: .center)
     }
 }
