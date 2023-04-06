@@ -7,6 +7,8 @@
 ![Preview](./Resources/ClientPreview.png)
 ![Preview](./Resources/MenuBarPreview.png)
 
+For Windows users, see [here](https://github.com/wxydejoy/MoneyProgress_win).
+
 ---
 
 Copyright © 2022 Lakr Aream. All Rights Reserved.
