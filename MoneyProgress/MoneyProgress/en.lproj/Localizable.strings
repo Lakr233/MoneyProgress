@@ -86,6 +86,12 @@
 "You can earn %@ %@ in one second" = "You can earn %@ %@ in one second";
 
 /* No comment provided by engineer. */
+"You can earn %@ %@ in one minute" = "You can earn %@ %@ in one minute";
+
+/* No comment provided by engineer. */
+"You can earn %@ %@ in one hour" = "You can earn %@ %@ in one hour";
+
+/* No comment provided by engineer. */
 "You can earn how much a day!" = "You can earn %@ %@ a day!";
 
 /* No comment provided by engineer. */
@@ -114,3 +120,13 @@
 
 /* No comment provided by engineer. */
 "💰 You have earned %.2f %@ today" = "💰 You have earned %.2f %@ today";
+
+/* No comment provided by engineer. */
+"Until the end of get off work at %@ There are still %d minutes" = "Until the end of get off work at %@ There are still %d minutes";
+
+/* No comment provided by engineer. */
+"Until the end of get off work at %@ There are still %d hours %d minutes" = "Until the end of get off work at %@ There are still %d hours %d minutes";
+
+/* No comment provided by engineer. */
+"It’s time to get off work, you’re not still working overtime!" = "It’s time to get off work, you’re not still working overtime!";
+

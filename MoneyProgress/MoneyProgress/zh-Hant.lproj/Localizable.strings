@@ -89,6 +89,12 @@
 "You can earn how much a day!" = "您一天能賺 %@ %@！";
 
 /* No comment provided by engineer. */
+"You can earn %@ %@ in one minute" = "您一分钟能挣 %@ %@";
+
+/* No comment provided by engineer. */
+"You can earn %@ %@ in one hour" = "您一小时能挣 %@ %@";
+
+/* No comment provided by engineer. */
 "You have earned your full salary today!" = "您已賺到今天的全部薪水！";
 
 /* No comment provided by engineer. */
@@ -114,3 +120,12 @@
 
 /* No comment provided by engineer. */
 "💰 You have earned %.2f %@ today" = "💰 您今天已賺 %.2f %@";
+
+/* No comment provided by engineer. */
+"Until the end of get off work at %@ There are still %d minutes" = "距离下班 %@ 还有 %d 分";
+
+/* No comment provided by engineer. */
+"Until the end of get off work at %@ There are still %d hours %d minutes" = "距离下班 %@ 还有 %d 小时 %d 分";
+
+/* No comment provided by engineer. */
+"It’s time to get off work, you’re not still working overtime!" = "您已经下班啦，不会还在加班吧！";

@@ -94,6 +94,10 @@ struct ContentView: View {
                     Text(text3)
                     let text4 = String(format: "You can earn %@ %@ in one second".localized, formattedCoinPerSecond, currencyUnit)
                     Text(text4)
+                    let text5 = String(format: "You can earn %@ %@ in one minute".localized, formattedCoinPerMinute, currencyUnit)
+                    Text(text5)
+                    let text6 = String(format: "You can earn %@ %@ in one hour".localized, formattedCoinPerHour, currencyUnit)
+                    Text(text6)
                 }
                 .font(.system(.caption, design: .rounded))
                 .lineLimit(1)
@@ -219,6 +223,14 @@ struct ContentView: View {
 
     var formattedCoinPerSecond: String {
         String(format: "%.4f", coinPerSecond)
+    }
+
+    var formattedCoinPerMinute: String {
+        String(format: "%.4f", coinPerSecond * 60)
+    }
+
+    var formattedCoinPerHour: String {
+        String(format: "%.4f", coinPerSecond * 60 * 60)
     }
 
     var coinPerDay: Double {
