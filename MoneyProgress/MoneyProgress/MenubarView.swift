@@ -26,11 +26,13 @@ struct MenubarView: View {
     }
 
     var body: some View {
+        Spacer()
         ZStack {
             content
                 .padding()
         }
         .frame(width: 400, height: 200)
+        Spacer()
     }
 
     var content: some View {
@@ -47,6 +49,11 @@ struct MenubarView: View {
                 }
             }
             .font(.headline)
+            
+            HStack {
+                Text(String(getEndTime()))
+            }
+            .font(.subheadline)
 
             HStack {
                 Text("Today's Progress".localized)
@@ -81,6 +88,7 @@ struct MenubarView: View {
 
             Button {
                 exit(0)
+                // menubar.stop()
             } label: {
                 Circle()
                     .foregroundColor(.black)
@@ -96,6 +104,30 @@ struct MenubarView: View {
             .buttonStyle(PlainButtonStyle())
         }
     }
+    
+    private func getEndTime() -> String {
+        let workEndDate = Date(timeIntervalSince1970: menubar.workEnd)
+        let nowDate = Date()
+        let calendar = Calendar.current
+        let diff:DateComponents = calendar.dateComponents([.hour,.minute], from: nowDate, to: workEndDate)
+        let diffHour:Int = diff.hour ?? 0
+        let diffMinute:Int = (diff.minute ?? 0) + 1
+        
+        let df = DateFormatter()
+        df.dateFormat = "yyyy-MM-dd HH:mm"
+        let endWorkTimeString = df.string(from: Date(timeIntervalSince1970: menubar.workEnd))
+        debugPrint("endWorkTime: ",endWorkTimeString)
+        if (diffHour > 0){
+            return String(format: NSLocalizedString("Until the end of get off work at %@ There are still %d hours %d minutes", comment: ""),
+                          endWorkTimeString, diffHour, diffMinute)
+        } else if (diffHour <= 0 && diffMinute > 0) {
+            return String(format: "Until the end of get off work at %@ There are still %d minutes".localized,
+                        diffMinute, endWorkTimeString)
+        }else {
+            return String(format: NSLocalizedString("It’s time to get off work, you’re not still working overtime!",comment: ""))
+        }
+    }
+
 }
 
 struct MenubarView_Previews: PreviewProvider {
